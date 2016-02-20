@@ -6,8 +6,8 @@
         .factory("UserService", UserService);
 
     function UserService($scope) {
-        var currUsers = [];
-        currUsers = [
+        var users = [];
+        users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
                 "username":"alice",  "password":"alice",   "roles": ["student"]		},
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
@@ -20,6 +20,79 @@
                 "username":"ed",     "password":"ed",      "roles": ["student"]		}
         ];
 
+        /*
+         * @param   {string} username   : user name to check
+         * @param   {string} password   : password to check
+         * @param   {func} callback     : callback function to use
+         */
+        function findUserByUserNameAndPassword(username, password, callback) {
+            // Iterate over the array of current users
+            var user = null;
+            for (var i = 0; i < users.length; i++) {
+                // Check for match with username and password
+                if (users[i].username = username && users[i].password == password) {
+                    user = users[i];
+                    break;
+                }
+            }
+            // Callback
+            callback(user);
+        }
+
+        /*
+         * @param   {func} callback     : callback function to use
+         */
+        function findAllUsers(callback) {
+            callback(users);
+        }
+
+        /*
+         * @param   {object} user       : user object to add
+         * @param   {func} callback     : callback function to use
+         */
+        function createUser(user, callback) {
+            user._id = (new Date).getTime();
+            users.push(user);
+            callback(user);
+        }
+
+        /*
+         * @param   {int} userId        : id of user to remove
+         * @param   {func} callback     : callback function to use
+         */
+        function deleteUser(userId, callback) {
+            // Iterate over the users
+            for (var i = 0; i < users.length; i++) {
+                // Remove user from list if found
+                if (users[i]._id == userId) {
+                    users.splice(i,1);
+                }
+            }
+            // Callback
+            callback(users);
+        }
+
+        /*
+         * @param   {int} userId        : id of user to update
+         * @param   {object} user       : user object containing new properties
+         * @param   {func} callback     : callback function to use
+         */
+        function updateUser(userId, user, callback) {
+            // Iterate over the users
+            for (var i = 0; i < users.length; i++) {
+                if (users[i]._id == userId) {
+                    users[i].firstName = user.firstName;
+                    users[i].lastName = user.lastName;
+                    users[i].username = user.username;
+                    users[i].password = user.password;
+                    users[i].roles = user.roles;
+
+                    // Callback
+                    callback(users[i]);
+                    break;
+                }
+            }
+        }
         
 
     }
