@@ -43,7 +43,7 @@
             var user = null;
             for (var i = 0; i < users.length; i++) {
                 // Check for match with username and password
-                if (users[i].username = username && users[i].password == password) {
+                if (users[i].username == username && users[i].password == password) {
                     user = users[i];
                     break;
                 }
