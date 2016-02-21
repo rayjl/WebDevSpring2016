@@ -5,7 +5,9 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService($scope) {
+    function UserService() {
+
+        // Default users list
         var users = [];
         users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
@@ -20,12 +22,23 @@
                 "username":"ed",     "password":"ed",      "roles": ["student"]		}
         ];
 
+        // Create a container to return all this stuff
+        var service = {
+            findUserByCredentials: findUserByCredentials,
+            findAllUsers: findAllUsers,
+            createUser: createUser,
+            deleteUserById: deleteUserById,
+            updateUser: updateUser,
+            users : users
+        };
+        return service;
+
         /*
          * @param   {string} username   : user name to check
          * @param   {string} password   : password to check
          * @param   {func} callback     : callback function to use
          */
-        function findUserByUserNameAndPassword(username, password, callback) {
+        function findUserByCredentials(username, password, callback) {
             // Iterate over the array of current users
             var user = null;
             for (var i = 0; i < users.length; i++) {
@@ -60,7 +73,7 @@
          * @param   {int} userId        : id of user to remove
          * @param   {func} callback     : callback function to use
          */
-        function deleteUser(userId, callback) {
+        function deleteUserById(userId, callback) {
             // Iterate over the users
             for (var i = 0; i < users.length; i++) {
                 // Remove user from list if found
@@ -81,19 +94,13 @@
             // Iterate over the users
             for (var i = 0; i < users.length; i++) {
                 if (users[i]._id == userId) {
-                    users[i].firstName = user.firstName;
-                    users[i].lastName = user.lastName;
-                    users[i].username = user.username;
-                    users[i].password = user.password;
-                    users[i].roles = user.roles;
-
+                    users[i] = user;
                     // Callback
                     callback(users[i]);
                     break;
                 }
             }
         }
-        
 
     }
 

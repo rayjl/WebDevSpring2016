@@ -1,89 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-</head>
+<!--Forms Title-->
+<h1 class="page-header">Forms</h1>
 
-<!--Body Code-->
-<body>
+<!--Wrap it all in a form class-->
+<form class="form-horizontal">
 
-    <!--This is the container for the pages content-->
-    <div class="container-fluid">
-        <div class="row">
+    <!--Forms and Fields tabs-->
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="forms.view.html">Forms</a></li>
+        <li role="presentation"><a href="forms-fields.view.html">Fields</a></li>
+    </ul>
 
-            <!--Main content-->
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Forms</h1>
+    <!--Table of data-->
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <span class="glyphicon glyphicon-triangle-bottom"></span>
+                    Form Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="text" class="form-control" placeholder="name">
+                </th>
+                <th class="text-right">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-ok"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Registration Form
+                </td>
+                <td class="text-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Contact List
+                </td>
+                <td class="text-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    To Do List
+                </td>
+                <td class="text-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-                <!--Wrap it all in a form class-->
-                <form class="form-horizontal">
-
-                    <!--Forms and Fields tabs-->
-                    <ul class="nav nav-tabs">
-                        <li role="presentation" class="active"><a href="forms.view.html">Forms</a></li>
-                        <li role="presentation"><a href="forms-fields.view.html">Fields</a></li>
-                    </ul>
-
-                    <!--Table of data-->
-                    <table class="table table-bordered table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                                    Form Name
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <input type="text" class="form-control" placeholder="name">
-                                </th>
-                                <th class="text-right">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Registration Form
-                                </td>
-                                <td class="text-right">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Contact List
-                                </td>
-                                <td class="text-right">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    To Do List
-                                </td>
-                                <td class="text-right">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </form>
-            </div>
-
-        </div>
-    </div>
-</body>
-</html>
+</form>

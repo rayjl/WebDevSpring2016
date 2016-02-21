@@ -1,186 +1,156 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-</head>
+<!--Forms-Fields Title-->
+<h1 class="page-header">Forms : Registration Form</h1>
 
-<!--Body Code-->
-<body>
+<!--Wrap it all in a form class-->
+<form class="form-horizontal">
 
-    <!--This is the container for the pages content-->
-    <div class="container-fluid">
-        <div class="row">
+    <!--Form and Fields tabs-->
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="forms.view.html">Forms</a></li>
+        <li role="presentation" class="active"><a href="forms-fields.view.html">Fields</a></li>
+    </ul>
 
-            <!--Main content-->
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Forms : Registration Form</h1>
-
-                <!--Wrap it all in a form class-->
-                <form class="form-horizontal">
-
-                    <!--Form and Fields tabs-->
-                    <ul class="nav nav-tabs">
-                        <li role="presentation"><a href="forms.view.html">Forms</a></li>
-                        <li role="presentation" class="active"><a href="forms-fields.view.html">Fields</a></li>
-                    </ul>
-
-                    <!--Div data-->
-                    <!--FirstName-->
-                    <div class="row top-buffer">
-                        <div class="col-xs-6">
-                            <label for="firstName">First Name:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <input id="firstName" type="text" class="form-control" placeholder="First Name"/>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="glyphicon glyphicon-plus"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                        </div>
-                    </div>
-                    <!--LastName-->
-                    <div class="row top-buffer">
-                        <div class="col-xs-6">
-                            <label for="lastName">Last Name:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <input id="lastName" type="text" class="form-control" placeholder="Last Name"/>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="glyphicon glyphicon-plus"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                        </div>
-                    </div>
-                    <!--DateOfBirth-->
-                    <div class="row top-buffer">
-                        <div class="col-xs-6">
-                            <label for="dob">Date Of Birth:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <input id="dob" type="date" class="form-control" placeholder="Select Date"/>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="glyphicon glyphicon-plus"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                        </div>
-                    </div>
-                    <!--GenderDropDown-->
-                    <div class="row top-buffer">
-                        <div class="col-xs-6">
-                            <label for="genderDropDown">Gender:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6 dropdown">
-                            <select class="selectmenu" id="genderDropDown">
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="glyphicon glyphicon-plus"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                        </div>
-                    </div>
-                    <!--CheckBoxes-->
-                    <div class="row top-buffer">
-                        <div class="col-xs-6">
-                            <label for="rolesChecks">Roles:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="checkbox" id="rolesChecks">
-                                <label><input type="checkbox" value="">Admin</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Student</label>
-                            </div>
-                            <div class="checkbox disabled">
-                                <label><input type="checkbox" value="">User</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="glyphicon glyphicon-plus"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                        </div>
-                    </div>
-                    <!--LicenseRadioButtons-->
-                    <div class="row top-buffer">
-                        <div class="col-xs-6">
-                            <label for="licenseRadios">License Agreement:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="radio" id="licenseRadios">
-                                <label><input type="radio" name="optradio">Yes</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="optradio">No</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="glyphicon glyphicon-plus"></span>
-                            <span class="glyphicon glyphicon-remove"></span>
-                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                        </div>
-                    </div>
-                    <!--AddNewField-->
-                    <div class="row top-buffer-border">
-                        <div class="col-xs-6">
-                            <label for="newFieldDropDown">Add New Field:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <select class="selectmenu" id="newFieldDropDown">
-                                <option>Single Line Text Field</option>
-                                <option>Date</option>
-                                <option>Dropdown</option>
-                                <option>Checkboxes</option>
-                                <option>Radio buttons</option>
-                                <option>Paragraph Text Field</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            <span class="glyphicon glyphicon-pencil glyphicon-inviso"></span>
-                            <span class="glyphicon glyphicon-plus"></span>
-                            <span class="glyphicon glyphicon-remove glyphicon-inviso"></span>
-                            <span class="glyphicon glyphicon-menu-hamburger glyphicon-inviso"></span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
+    <!--Div data-->
+    <!--FirstName-->
+    <div class="row top-buffer">
+        <div class="col-xs-6">
+            <label for="firstName">First Name:</label>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</body>
-</html>
+    <div class="row">
+        <div class="col-xs-6">
+            <input id="firstName" type="text" class="form-control" placeholder="First Name"/>
+        </div>
+        <div class="col-xs-6 text-right">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+    </div>
+    <!--LastName-->
+    <div class="row top-buffer">
+        <div class="col-xs-6">
+            <label for="lastName">Last Name:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <input id="lastName" type="text" class="form-control" placeholder="Last Name"/>
+        </div>
+        <div class="col-xs-6 text-right">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+    </div>
+    <!--DateOfBirth-->
+    <div class="row top-buffer">
+        <div class="col-xs-6">
+            <label for="dob">Date Of Birth:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <input id="dob" type="date" class="form-control" placeholder="Select Date"/>
+        </div>
+        <div class="col-xs-6 text-right">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+    </div>
+    <!--GenderDropDown-->
+    <div class="row top-buffer">
+        <div class="col-xs-6">
+            <label for="genderDropDown">Gender:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 dropdown">
+            <select class="selectmenu" id="genderDropDown">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
+        <div class="col-xs-6 text-right">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+    </div>
+    <!--CheckBoxes-->
+    <div class="row top-buffer">
+        <div class="col-xs-6">
+            <label for="rolesChecks">Roles:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="checkbox" id="rolesChecks">
+                <label><input type="checkbox" value="">Admin</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" value="">Student</label>
+            </div>
+            <div class="checkbox disabled">
+                <label><input type="checkbox" value="">User</label>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+    </div>
+    <!--LicenseRadioButtons-->
+    <div class="row top-buffer">
+        <div class="col-xs-6">
+            <label for="licenseRadios">License Agreement:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="radio" id="licenseRadios">
+                <label><input type="radio" name="optradio">Yes</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="optradio">No</label>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+    </div>
+    <!--AddNewField-->
+    <div class="row top-buffer-border">
+        <div class="col-xs-6">
+            <label for="newFieldDropDown">Add New Field:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <select class="selectmenu" id="newFieldDropDown">
+                <option>Single Line Text Field</option>
+                <option>Date</option>
+                <option>Dropdown</option>
+                <option>Checkboxes</option>
+                <option>Radio buttons</option>
+                <option>Paragraph Text Field</option>
+            </select>
+        </div>
+        <div class="col-xs-6 text-right">
+            <span class="glyphicon glyphicon-pencil glyphicon-inviso"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-remove glyphicon-inviso"></span>
+            <span class="glyphicon glyphicon-menu-hamburger glyphicon-inviso"></span>
+        </div>
+    </div>
+</form>
