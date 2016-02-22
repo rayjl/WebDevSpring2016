@@ -12,6 +12,8 @@
 
     <!--Table of data-->
     <table class="table table-bordered table-striped table-hover">
+
+        <!--Head-->
         <thead>
             <tr>
                 <th>
@@ -24,40 +26,24 @@
             </tr>
             <tr>
                 <th>
-                    <input type="text" class="form-control" placeholder="name">
+                    <input ng-model="formName" type="text" class="form-control" placeholder="name">
                 </th>
                 <th class="text-right">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span class="glyphicon glyphicon-ok"></span>
+                    <button ng-click="addForm(formName)" class="btn btn-default glyphicon glyphicon-plus"></button>
+                    <button ng-click="updateForm(formName)" class="btn btn-default glyphicon glyphicon-ok"></button>
                 </th>
             </tr>
         </thead>
+
+        <!--Body-->
         <tbody>
-            <tr>
+            <tr ng-repeat="form in forms">
                 <td>
-                    Registration Form
+                    {{form.title}}
                 </td>
                 <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Contact List
-                </td>
-                <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    To Do List
-                </td>
-                <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
+                    <button ng-click="deleteForm($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+                    <button ng-click="selectForm($index)" class="btn btn-default glyphicon glyphicon-pencil"></button>
                 </td>
             </tr>
         </tbody>

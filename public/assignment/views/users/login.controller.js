@@ -16,7 +16,7 @@
             UserService
                 .findUserByCredentials(username, password, function(user) {
                     if (!user) {
-                        console.log('Incorrect username or password.');
+                        alert('Incorrect username or password.');
                     } else {
                         $rootScope.user = user;
                         $location.url('/profile');

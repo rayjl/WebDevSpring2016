@@ -15,7 +15,7 @@
         function update(user) {
             UserService
                 .updateUser(user._id, user, function(user) {
-                    console.log('Profile updated.');
+                    alert('Profile updated.');
                 });
         }
 

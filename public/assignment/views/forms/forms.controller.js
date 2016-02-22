@@ -1,0 +1,96 @@
+(function(){
+    'use strict';
+
+    angular
+        .module("FormBuilderApp")
+        .controller("FormController", FormController);
+
+    function FormController($scope, $rootScope, $location, FormService) {
+        $scope.addForm = addForm;
+        $scope.updateForm = updateForm;
+        $scope.deleteForm = deleteForm;
+        $scope.selectForm = selectForm;
+        var user = $rootScope.user;
+
+        // Execute init to fetch forms if user valid
+        if (user) {
+            init();
+        } else {
+            alert('Invalid user credentials. Please login or register.');
+            $location.url('/login');
+        }
+
+        /*
+         * This function loads up the forms to the view
+         */
+        function init() {
+            // Fetch all the current forms available from the user
+            FormService
+                .findAllFormsForUser(user._id, function(forms) {
+                    $scope.forms = forms;
+                });
+        }
+
+        /*
+         * @param   {string} formName   : form to add
+         */
+        function addForm(formName) {
+            // Create a form variable out of the form name
+            var form = {
+                title: formName
+            };
+            // Add form for the user and update the view with the forms
+            FormService
+                .createFormForUser(user._id, form, function(form) {
+                    FormService
+                        .findAllFormsForUser(user._id, function(forms) {
+                            $scope.forms = forms;
+                        });
+                });
+        }
+
+        /*
+         * @param   {string} formName   : form to update
+         */
+        function updateForm(formName) {
+            // Create a variable out of the form name - add userId field too
+            var form = {
+                title: formName,
+                userId: user._id
+            };
+            // Update form for the user and update the view
+            FormService
+                .updateFormById($scope.selectedForm._id, form, function(form) {
+                    FormService
+                        .findAllFormsForUser(user._id, function(forms) {
+                            $scope.forms = forms;
+                        });
+                });
+        }
+
+        /*
+         * @param   {int} index     : index of the form to delete
+         */
+        function deleteForm(index) {
+            // Delete the selected form and update the view
+            FormService
+                .deleteFormById($scope.forms[index]._id, function(forms) {
+                    FormService
+                        .findAllFormsForUser(user._id, function(forms) {
+                            $scope.forms = forms;
+                        });
+                });
+        }
+
+        /*
+         * @param   {int} index     : index of the form selected
+         */
+        function selectForm(index) {
+            // Mark currently selected form and update form with selected one
+            $scope.selectedForm = $scope.forms[index];
+            $scope.formName = $scope.forms[index].title;
+        }
+
+    }
+
+})();

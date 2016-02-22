@@ -22,14 +22,14 @@
                 "username":"ed",     "password":"ed",      "roles": ["student"]		}
         ];
 
-        // Create a container to return all this stuff
+        // Create a container to return
         var service = {
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
-            users : users
+            users: users
         };
         return service;
 
@@ -79,6 +79,7 @@
                 // Remove user from list if found
                 if (users[i]._id == userId) {
                     users.splice(i,1);
+                    break;
                 }
             }
             // Callback
@@ -94,7 +95,9 @@
             // Iterate over the users
             for (var i = 0; i < users.length; i++) {
                 if (users[i]._id == userId) {
+                    user._id = userId;
                     users[i] = user;
+
                     // Callback
                     callback(users[i]);
                     break;
