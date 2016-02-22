@@ -16,8 +16,7 @@
         if (user) {
             init();
         } else {
-            alert('Invalid user credentials. Please login or register.');
-            $location.url('/login');
+            console.log('Login to use.');
         }
 
         /*
