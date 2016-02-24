@@ -16,14 +16,14 @@
         ];
 
         // Create a container to return
-        var service = {
+        var model = {
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
             forms: forms
         };
-        return service;
+        return model;
 
         /*
          * @param   {int} userId    : user id representing user

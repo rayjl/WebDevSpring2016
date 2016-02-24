@@ -5,7 +5,7 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService() {
+    function UserService($rootScope) {
 
         // Default users list
         var users = [];
@@ -23,7 +23,9 @@
         ];
 
         // Create a container to return
-        var service = {
+        var model = {
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser,
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
@@ -31,7 +33,21 @@
             updateUser: updateUser,
             users: users
         };
-        return service;
+        return model;
+
+        /*
+         * @param   {object} user       : user to set
+         */
+        function setCurrentUser(user) {
+            $rootScope.user = user;
+        }
+
+        /*
+         *
+         */
+        function getCurrentUser(user) {
+            return $rootScope.user;
+        }
 
         /*
          * @param   {string} username   : user name to check
