@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ZapApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!--CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--AngularJS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!--AngularJS Controllers-->
+    <script src="views/main/main.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+
+    <!--AngularJS Services-->
+    <script src="services/user.service.client.js"></script>
+
+</head>
+
+<!--Body Section-->
+<body ng-controller="MainController">
+
+<!--Top Nav Bar-->
+<nav ng-include src="'views/header/header.view.html'"></nav>
+
+<!--Main Content-->
+<div class="container-fluid">
+    <div class="row">
+
+        <!--Side Nav Bar-->
+        <div ng-include src="'views/sidebar/sidebar.view.html'"></div>
+
+        <!--Body-->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view></div>
+
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>
