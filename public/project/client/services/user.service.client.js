@@ -11,15 +11,14 @@
         var users = [];
         users = [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"]		},
+                "username":"alice",  "password":"alice",   "roles": ["student"],
+                "following":["bob", "charlie"],     "followers":["bob", "charlie"]      },
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"]		},
+                "username":"bob",    "password":"bob",     "roles": ["admin"],
+                "following":["alice", "charlie"],   "followers":["alice","charlie"]     },
             {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"]		},
-            {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
-            {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"]		}
+                "username":"charlie","password":"charlie", "roles": ["faculty"],
+                "following":["alice", "bob"],       "followers":["alice", "bob"]        }
         ];
 
         // Create a container to return

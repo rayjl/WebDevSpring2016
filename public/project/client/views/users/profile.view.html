@@ -1,0 +1,101 @@
+<!--Profile Title-->
+<h1 class="page-header">Profile</h1>
+<form class="form-horizontal">
+    <!--Profile Info-->
+    <div class="form-group">
+        <label for="usernameL" class="col-sm-2 control-label">Username</label>
+        <div class="col-sm-10">
+            <input ng-model="user.username" type="text" class="form-control" id="usernameL" placeholder="{{username}}" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="firstnameL" class="col-sm-2 control-label">First Name</label>
+        <div class="col-sm-10">
+            <input ng-model="user.firstName" type="text" class="form-control" id="firstnameL" placeholder="{{firstName}}" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastnameL" class="col-sm-2 control-label">Last Name</label>
+        <div class="col-sm-10">
+            <input ng-model="user.lastName" type="text" class="form-control" id="lastnameL" placeholder="{{lastName}}" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="emailL" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input ng-model="user.email" type="email" class="form-control" id="emailL" placeholder="{{email}}">
+        </div>
+    </div>
+
+    <!--Update-->
+    <div class="form-group">
+        <label for="passwordL" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <input ng-model="user.password" type="password" class="form-control" id="passwordL" placeholder="{{password}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="vPasswordL" class="col-sm-2 control-label">Verify Password</label>
+        <div class="col-sm-10">
+            <input ng-model="vPassword" type="password" class="form-control" id="vPasswordL" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button ng-click="update(user, vPassword)" class="btn btn-default">Update</button>
+        </div>
+    </div>
+
+    <!--Table of followed users-->
+    <table class="table table-bordered table-striped table-hover">
+        <!--Head-->
+        <thead>
+        <tr>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                Following
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        </thead>
+        <!--Body-->
+        <tbody>
+        <tr ng-repeat="followedUsers in following">
+            <td>
+                {{followedUsers}}
+            </td>
+            <td class="text-right">
+                <button ng-click="deleteForm($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--Table of followers-->
+    <table class="table table-bordered table-striped table-hover">
+        <!--Head-->
+        <thead>
+        <tr>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                Followers
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        </thead>
+        <!--Body-->
+        <tbody>
+        <tr ng-repeat="follower in followers">
+            <td>
+                {{follower}}
+            </td>
+            <td class="text-right">
+                <button ng-click="deleteUser($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
