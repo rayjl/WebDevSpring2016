@@ -24,11 +24,15 @@
                     templateUrl: "views/users/profile.view.html",
                     controller: "ProfileController"
                 })
+                .when("/people", {
+                    templateUrl: "views/users/people.view.html",
+                    controller: "PeopleController"
+                })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html"
                 })
-                .when("/data", {
-                    templateUrl: "views/data/analytics.view.html"
+                .when("/savedResults", {
+                    templateUrl: "views/data/savedResults.view.html"
                 })
                 .when("/searchResults", {
                     templateUrl: "views/data/searchResults.view.html"

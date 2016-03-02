@@ -1,0 +1,54 @@
+<!--People Page-->
+<h1 class="page-header">Following and Followers</h1>
+<!--Table of followed users-->
+<table class="table table-bordered table-striped table-hover">
+    <!--Head-->
+    <thead>
+    <tr>
+        <th>
+            <span class="glyphicon glyphicon-triangle-bottom"></span>
+            Following
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    </thead>
+    <!--Body-->
+    <tbody>
+    <tr ng-repeat="followedUsers in following">
+        <td>
+            {{followedUsers.username}}
+        </td>
+        <td class="text-right">
+            <button ng-click="deleteFollowing($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--Table of followers-->
+<table class="table table-bordered table-striped table-hover">
+    <!--Head-->
+    <thead>
+    <tr>
+        <th>
+            <span class="glyphicon glyphicon-triangle-bottom"></span>
+            Followers
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+    </thead>
+    <!--Body-->
+    <tbody>
+    <tr ng-repeat="follower in followers">
+        <td>
+            {{follower.username}}
+        </td>
+        <td class="text-right">
+            <button ng-click="deleteFollower($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+        </td>
+    </tr>
+    </tbody>
+</table>

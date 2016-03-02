@@ -8,9 +8,13 @@
             ng-show="user">
             <a href="#/profile">Profile</a>
         </li>
-        <li ng-class="{'active' : $location.url().indexOf('analytics') != -1}"
+        <li ng-class="{'active' : $location.url().indexOf('people') != -1}"
             ng-show="user">
-            <a href="#/analytics">Analytics</a>
+            <a href="#/people">People</a>
+        </li>
+        <li ng-class="{'active' : $location.url().indexOf('savedResults') != -1}"
+            ng-show="user">
+            <a href="#/savedResults">Saved Results</a>
         </li>
         <li ng-class="{'active' : $location.url().indexOf('admin') != -1}"
             ng-show="user && user.roles.indexOf('admin') >= 0">

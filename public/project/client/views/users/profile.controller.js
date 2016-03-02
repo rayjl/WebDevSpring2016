@@ -21,18 +21,6 @@
          */
         function init() {
             $scope.user = user;
-            // Fetch all the followers and followed
-            $scope.following = $scope.user.following;
-            $scope.followers = $scope.user.followers;
-        }
-
-        /*
-         * @param   {int} index     : index of the user to delete
-         */
-        function deleteUser(index) {
-            // Delete the user from the view and the users properties
-
-
         }
 
         /*
