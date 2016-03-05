@@ -9,7 +9,7 @@
         $scope.update = update;
         var user = $rootScope.user;
 
-        // Execute init to fetch forms if user valid
+        // Execute init to fill the profile page if valid user
         if (user) {
             init();
         } else {

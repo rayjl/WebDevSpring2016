@@ -8,35 +8,45 @@
     function UserService($rootScope) {
 
         // Default users list
+        var admin = {
+            "_id"           : 888,
+            "firstName"     : "Raymond",
+            "lastName"      : "Li",
+            "username"      : "admin",
+            "password"      : "admin",
+            "accountType"   : "admin",
+            "following"     : [],
+            "followers"     : []
+        };
         var alice = {
-            "_id"       : 123,
-            "firstName" : "Alice",
-            "lastName"  : "Wonderland",
-            "username"  : "alice",
-            "password"  : "alice",
-            "roles"     : ["user"],
-            "following" : [],
-            "followers" : []
+            "_id"           : 123,
+            "firstName"     : "Alice",
+            "lastName"      : "Wonderland",
+            "username"      : "alice",
+            "password"      : "alice",
+            "accountType"   : "user",
+            "following"     : [],
+            "followers"     : []
         };
         var bob = {
-            "_id"       : 234,
-            "firstName" : "Bob",
-            "lastName"  : "Hope",
-            "username"  : "bob",
-            "password"  : "bob",
-            "roles"     : ["user"],
-            "following" : [],
-            "followers" : []
+            "_id"           : 234,
+            "firstName"     : "Bob",
+            "lastName"      : "Hope",
+            "username"      : "bob",
+            "password"      : "bob",
+            "accountType"   : "user",
+            "following"     : [],
+            "followers"     : []
         };
         var charlie = {
-            "_id"       : 345,
-            "firstName" : "Charlie",
-            "lastName"  : "Brown",
-            "username"  : "charlie",
-            "password"  : "charlie",
-            "roles"     : ["user"],
-            "following" : [],
-            "followers" : []
+            "_id"           : 345,
+            "firstName"     : "Charlie",
+            "lastName"      : "Brown",
+            "username"      : "charlie",
+            "password"      : "charlie",
+            "accountType"   : "user",
+            "following"     : [],
+            "followers"     : []
         };
         alice.following = [];
         alice.followers = [bob,charlie];
@@ -44,7 +54,7 @@
         bob.followers = [charlie];
         charlie.following = [alice, bob];
         charlie.followers = [];
-        var users = [alice, bob, charlie];
+        var users = [admin, alice, bob, charlie];
 
         // Create a container to return
         var model = {
@@ -175,6 +185,10 @@
          */
         function createUser(user, callback) {
             user._id = (new Date).getTime();
+            user.firstName = [];
+            user.lastName = [];
+            user.following = [];
+            user.followers = [];
             users.push(user);
             callback(user);
         }
@@ -188,6 +202,16 @@
             for (var i = 0; i < users.length; i++) {
                 // Remove user from list if found
                 if (users[i]._id == userId) {
+                    // First remove the user from other users' following list
+                    for (var j = 0; j < users.length; j++) {
+                        if (users[j]._id != userId) {
+                            for (var k = 0; k < users[j].following.length; k++) {
+                                if (users[j].following[k]._id == userId) {
+                                    users[j].following.splice(k,1);
+                                }
+                            }
+                        }
+                    }
                     users.splice(i,1);
                     break;
                 }
@@ -205,8 +229,10 @@
             // Iterate over the users
             for (var i = 0; i < users.length; i++) {
                 if (users[i]._id == userId) {
-                    user._id = userId;
-                    users[i] = user;
+                    // Update
+                    users[i].username = user.username;
+                    users[i].password = user.password;
+                    users[i].accountType = user.accountType;
 
                     // Callback
                     callback(users[i]);

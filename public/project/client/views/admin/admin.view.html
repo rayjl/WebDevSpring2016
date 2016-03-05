@@ -1,88 +1,63 @@
 <!--Admin Title-->
 <h1 class="page-header">Admin</h1>
-
 <!--Wrap it all in a form class-->
 <form class="form-horizontal">
-    <h2>Users</h2>
-
-    <!--Table data-->
+    <h3>Users</h3>
+    <!--Table of users-->
     <table class="table table-bordered table-striped table-hover">
+        <!--Head-->
         <thead>
-            <tr>
-                <th>
-                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    Username
-                </th>
-                <th>
-                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    Password
-                </th>
-                <th>
-                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    Role
-                </th>
-                <th>
-                    Action
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <input type="text" class="form-control" placeholder="username">
-                </th>
-                <th>
-                    <input type="password" class="form-control" placeholder="password">
-                </th>
-                <th>
-                    <input type="text" class="form-control" placeholder="role1, role2">
-                </th>
-                <th class="text-right">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span class="glyphicon glyphicon-ok"></span>
-                </th>
-            </tr>
+        <tr>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                Username
+            </th>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                Password
+            </th>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                Account Type
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <input ng-model="inputUser.username" type="text" class="form-control" placeholder="username" required>
+            </th>
+            <th>
+                <input ng-model="inputUser.password" type="password" class="form-control" placeholder="password" required>
+            </th>
+            <th>
+                <input ng-model="inputUser.accountType" type="text" class="form-control" placeholder="account type" required>
+            </th>
+            <th class="text-right">
+                <button ng-click="addUser(inputUser)" class="btn btn-default glyphicon glyphicon-plus"></button>
+                <button ng-click="updateUser(inputUser)" class="btn btn-default glyphicon glyphicon-ok"></button>
+            </th>
+        </tr>
         </thead>
+        <!--Body-->
         <tbody>
-            <tr>
-                <td>
-                    alice
-                </td>
-                <td>
-                </td>
-                <td>
-                    student
-                </td>
-                <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    bob
-                </td>
-                <td>
-                </td>
-                <td>
-                    faculty | admin
-                </td>
-                <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    charlie
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </td>
-            </tr>
+        <tr ng-repeat="user in users">
+            <td>
+                {{user.username}}
+            </td>
+            <td>
+            </td>
+            <td>
+                {{user.accountType}}
+            </td>
+            <td class="text-right">
+                <button ng-click="removeUser($index)" class="btn btn-default glyphicon glyphicon-remove"
+                        ng-show="user.accountType.indexOf('admin') == -1"></button>
+                <button ng-click="selectUser($index)" class="btn btn-default glyphicon glyphicon-pencil"
+                        ng-show="user.accountType.indexOf('admin') == -1"></button>
+            </td>
+        </tr>
         </tbody>
     </table>
 </form>

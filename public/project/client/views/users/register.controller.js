@@ -16,7 +16,8 @@
             var newUser = {
                 username: user.username,
                 password: user.password,
-                email: user.email
+                email: user.email,
+                accountType: "user"
             };
 
             // Create a new user using the user service factory

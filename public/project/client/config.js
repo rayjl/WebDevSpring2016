@@ -29,7 +29,8 @@
                     controller: "PeopleController"
                 })
                 .when("/admin", {
-                    templateUrl: "views/admin/admin.view.html"
+                    templateUrl: "views/admin/admin.view.html",
+                    controller: "AdminController"
                 })
                 .when("/savedResults", {
                     templateUrl: "views/data/savedResults.view.html"
