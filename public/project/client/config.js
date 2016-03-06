@@ -9,9 +9,6 @@
                     templateUrl: "views/home/home.view.html",
                     controller: "HomeController"
                 })
-                .when("/home", {
-                    templateUrl: "views/home/home.view.html"
-                })
                 .when("/register", {
                     templateUrl: "views/users/register.view.html",
                     controller: "RegisterController"
@@ -33,10 +30,8 @@
                     controller: "AdminController"
                 })
                 .when("/savedResults", {
-                    templateUrl: "views/data/savedResults.view.html"
-                })
-                .when("/searchResults", {
-                    templateUrl: "views/data/searchResults.view.html"
+                    templateUrl: "views/data/savedResults.view.html",
+                    controller: "SavedResultsController"
                 })
                 .otherwise({
                     redirectTo: "/"

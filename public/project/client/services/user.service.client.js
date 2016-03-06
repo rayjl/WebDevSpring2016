@@ -16,7 +16,8 @@
             "password"      : "admin",
             "accountType"   : "admin",
             "following"     : [],
-            "followers"     : []
+            "followers"     : [],
+            "savedListings" : []
         };
         var alice = {
             "_id"           : 123,
@@ -26,7 +27,8 @@
             "password"      : "alice",
             "accountType"   : "user",
             "following"     : [],
-            "followers"     : []
+            "followers"     : [],
+            "savedListings" : []
         };
         var bob = {
             "_id"           : 234,
@@ -36,7 +38,8 @@
             "password"      : "bob",
             "accountType"   : "user",
             "following"     : [],
-            "followers"     : []
+            "followers"     : [],
+            "savedListings" : []
         };
         var charlie = {
             "_id"           : 345,
@@ -46,7 +49,8 @@
             "password"      : "charlie",
             "accountType"   : "user",
             "following"     : [],
-            "followers"     : []
+            "followers"     : [],
+            "savedListings" : []
         };
         alice.following = [];
         alice.followers = [bob,charlie];
@@ -189,6 +193,7 @@
             user.lastName = [];
             user.following = [];
             user.followers = [];
+            user.savedListings = [];
             users.push(user);
             callback(user);
         }
