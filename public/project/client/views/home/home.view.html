@@ -1,73 +1,72 @@
 <!--Home Title-->
 <h1 class="page-header text-center">ZapApp</h1>
 <h5 class="text-center">Find Your Dream Home</h5>
-<div class="container container-table">
+<div class="container-fluid">
     <div class="row vertical-center-row">
-        <div class="input-group col-md-4 col-md-offset-3">
-            <input type="text" class="form-control" placeholder="Enter an address, neighborhood, city, ZIP code">
+        <div class="input-group col-md-4 col-md-offset-4">
+            <input ng-model="searchString" type="text" class="form-control" placeholder="Enter an address, city, state, and ZIP">
             <span class="input-group-btn">
-                <button ng-click="setSearchState(true)" class="btn btn-primary" type="button">Zap!</button>
+                <button ng-click="executeSearch(searchString)" class="btn btn-primary" type="button">Zap!</button>
             </span>
         </div>
     </div>
+</div>
 
-    <!--Search Results Displayed only after a search-->
-    <div ng-show="searchState">
-        <h3>Search Results</h3>
-        <!--Table of users-->
-        <table class="table table-bordered table-striped table-hover">
-            <!--Head-->
-            <thead>
-            <tr>
-                <th>
-                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    ID
-                </th>
-                <th>
-                    Street
-                </th>
-                <th>
-                    City
-                </th>
-                <th>
-                    State
-                </th>
-                <th>
-                    <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    Zestimate - Amount USD
-                </th>
-                <th>
-                    Details
-                </th>
-            </tr>
-            </thead>
-            <!--Body-->
-            <tbody>
-            <tr ng-repeat="listing in listings">
-                <td>
-                    {{listing._id}}
-                </td>
-                <td>
-                    {{listing.street}}
-                </td>
-                <td>
-                    {{listing.city}}
-                </td>
-                <td>
-                    {{listing.state}}
-                </td>
-                <td>
-                    {{listing.zestimate}}
-                </td>
-                <td>
-                    {{listing.details}}
-                </td>
-                <td class="text-right">
-                    <button ng-click="saveListing($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
+<!--Search Results Displayed only after a search-->
+<div ng-show="searchState">
+    <h3>Search Results</h3>
+    <!--Table of users-->
+    <table class="table table-bordered table-striped table-hover">
+        <!--Head-->
+        <thead>
+        <tr>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                ID
+            </th>
+            <th>
+                Street
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                Zestimate - Amount USD
+            </th>
+            <th>
+                Details
+            </th>
+        </tr>
+        </thead>
+        <!--Body-->
+        <tbody>
+        <tr ng-repeat="listing in listings">
+            <td>
+                {{listing._id}}
+            </td>
+            <td>
+                {{listing.street}}
+            </td>
+            <td>
+                {{listing.city}}
+            </td>
+            <td>
+                {{listing.state}}
+            </td>
+            <td>
+                {{listing.zestimate}}
+            </td>
+            <td>
+                {{listing.details}}
+            </td>
+            <td class="text-right">
+                <button ng-click="saveListing($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>

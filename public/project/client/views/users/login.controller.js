@@ -19,7 +19,7 @@
                         alert('Incorrect username or password.');
                     } else {
                         $rootScope.user = user;
-                        $location.url('/profile');
+                        $location.url('/home');
                     }
                 });
         }

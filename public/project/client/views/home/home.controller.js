@@ -7,7 +7,7 @@
 
     function HomeController($scope, $rootScope, DataService) {
         $scope.saveListing = saveListing;
-        $scope.setSearchState = setSearchState;
+        $scope.executeSearch = executeSearch;
         var user = $rootScope.user;
 
         if (user) {
@@ -30,6 +30,36 @@
                 .addSavedListing($scope.listings[index], function(listings) {
 
                 });
+        }
+
+        /*
+         * @param   {string} searchString   : search input string
+         */
+        function executeSearch(searchString) {
+
+            console.log(searchString);
+
+            // Check if string is empty
+            if (searchString == undefined || searchString.length == 0) {
+                $scope.listings = [];
+                setSearchState(false);
+            } else {
+                // Parse search string
+
+
+                // API fetch request here
+                var newListings = [];
+
+
+                // Set the search state of the page and the new listings returned
+                if (newListings.length > 0) {
+                    $scope.listings = newListings;
+                    setSearchState(true);
+                } else {
+                    $scope.listings = [];
+                    setSearchState(true);
+                }
+            }
         }
 
         /*
