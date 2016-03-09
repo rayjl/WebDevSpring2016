@@ -33,9 +33,9 @@
                     templateUrl: "views/admin/admin.view.html",
                     controller: "AdminController"
                 })
-                .when("/savedResults", {
-                    templateUrl: "views/data/savedResults.view.html",
-                    controller: "SavedResultsController"
+                .when("/details", {
+                    templateUrl: "views/data/details.view.html",
+                    controller: "DetailsController"
                 })
                 .otherwise({
                     redirectTo: "/"

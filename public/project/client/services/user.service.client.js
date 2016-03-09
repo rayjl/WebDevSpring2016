@@ -61,7 +61,7 @@
         var users = [admin, alice, bob, charlie];
 
         // Create a container to return
-        var model = {
+        var service = {
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             findUserByCredentials: findUserByCredentials,
@@ -75,7 +75,7 @@
             deleteFollowerById: deleteFollowerById,
             users: users
         };
-        return model;
+        return service;
 
         /*
          * @param   {object} firstUser  : main user

@@ -44,11 +44,13 @@
                 $scope.listings = [];
                 setSearchState(false);
             } else {
-                // Parse search string
+                // Parse search string and create API fetch string
+
 
 
                 // API fetch request here
                 var newListings = [];
+
 
 
                 // Set the search state of the page and the new listings returned

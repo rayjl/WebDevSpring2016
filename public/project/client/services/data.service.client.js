@@ -35,14 +35,14 @@
         var listings = [list1, list2, list3];
 
         // Create container to return
-        var model = {
+        var service = {
             findAllSavedListings: findAllSavedListings,
             findSavedListingById: findSavedListingById,
             addSavedListing: addSavedListing,
             deleteSavedListingById: deleteSavedListingById,
             listings: listings
         };
-        return model;
+        return service;
 
         /*
          * @param   {func} callback     : callback function

@@ -1,0 +1,59 @@
+<!--Admin Title-->
+<h1 class="page-header">Details</h1>
+<!--Wrap it all in a form class-->
+<h3>User Saved Listings</h3>
+<!--Table of users-->
+<table class="table table-bordered table-striped table-hover">
+    <!--Head-->
+    <thead>
+    <tr>
+        <th>
+            <span class="glyphicon glyphicon-triangle-bottom"></span>
+            ID
+        </th>
+        <th>
+            Street
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            <span class="glyphicon glyphicon-triangle-bottom"></span>
+            Zestimate - Amount USD
+        </th>
+        <th>
+            Info
+        </th>
+    </tr>
+    </thead>
+    <!--Body-->
+    <tbody>
+    <tr ng-repeat="listing in listings">
+        <td>
+            {{listing._id}}
+        </td>
+        <td>
+            {{listing.street}}
+        </td>
+        <td>
+            {{listing.city}}
+        </td>
+        <td>
+            {{listing.state}}
+        </td>
+        <td>
+            {{listing.zestimate}}
+        </td>
+        <td>
+            <!--This should be a link to stuff-->
+            {{listing.info}}
+        </td>
+        <td class="text-right">
+            <button ng-click="removeListing($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+        </td>
+    </tr>
+    </tbody>
+</table>

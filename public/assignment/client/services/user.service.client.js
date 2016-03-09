@@ -23,7 +23,7 @@
         ];
 
         // Create a container to return
-        var model = {
+        var service = {
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             findUserByCredentials: findUserByCredentials,
@@ -33,7 +33,7 @@
             updateUser: updateUser,
             users: users
         };
-        return model;
+        return service;
 
         /*
          * @param   {object} user       : user to set
