@@ -5,9 +5,6 @@
         .module("FormBuilderApp")
         .config(function($routeProvider){
             $routeProvider
-                .when("/", {
-                    templateUrl: "views/home/home.view.html"
-                })
                 .when("/home", {
                     templateUrl: "views/home/home.view.html"
                 })
@@ -31,7 +28,7 @@
                     controller: "FormController"
                 })
                 .otherwise({
-                    redirectTo: "/"
+                    redirectTo: "/home"
                 });
         });
 
