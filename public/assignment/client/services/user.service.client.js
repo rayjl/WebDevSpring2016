@@ -5,120 +5,92 @@
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService($rootScope) {
+    function UserService($http, $q) {
 
-        // Default users list
-        var users = [];
-        users = [
-            {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"]		},
-            {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"]		},
-            {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"]		},
-            {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
-            {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"]		}
-        ];
+        // --------------------------------------------------------------------
 
         // Create a container to return
         var service = {
-            setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser,
+            findUserById: findUserById,
+            findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser,
-            users: users
+            updateUser: updateUser
         };
         return service;
 
-        /*
-         * @param   {object} user       : user to set
-         */
-        function setCurrentUser(user) {
-            $rootScope.user = user;
+        // --------------------------------------------------------------------
+
+        function findUserById(userId) {
+            var defer = $q.defer();
+            $http
+                .get("/api/assignment/user/" + userId)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        /*
-         *
-         */
-        function getCurrentUser(user) {
-            return $rootScope.user;
+        function findUserByUsername(username) {
+            var defer = $q.defer();
+            $http
+                .get("/api/assignment/user?username=" + username)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        /*
-         * @param   {string} username   : user name to check
-         * @param   {string} password   : password to check
-         * @param   {func} callback     : callback function to use
-         */
-        function findUserByCredentials(username, password, callback) {
-            // Iterate over the array of current users
-            var user = null;
-            for (var i = 0; i < users.length; i++) {
-                // Check for match with username and password
-                if (users[i].username == username && users[i].password == password) {
-                    user = users[i];
-                    break;
-                }
-            }
-            // Callback
-            callback(user);
+        function findUserByCredentials(username, password) {
+            var defer = $q.defer();
+            $http
+                .get("/api/assignment/user?username=" + username + "&password=" + password)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        /*
-         * @param   {func} callback     : callback function to use
-         */
-        function findAllUsers(callback) {
-            callback(users);
+        function findAllUsers() {
+            var defer = $q.defer();
+            $http
+                .get("/api/assignment/user")
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        /*
-         * @param   {object} user       : user object to add
-         * @param   {func} callback     : callback function to use
-         */
-        function createUser(user, callback) {
-            user._id = (new Date).getTime();
-            users.push(user);
-            callback(user);
+        function createUser(userObj) {
+            var defer = $q.defer();
+            $http
+                .post("/api/assignment/user", userObj)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        /*
-         * @param   {int} userId        : id of user to remove
-         * @param   {func} callback     : callback function to use
-         */
-        function deleteUserById(userId, callback) {
-            // Iterate over the users
-            for (var i = 0; i < users.length; i++) {
-                // Remove user from list if found
-                if (users[i]._id == userId) {
-                    users.splice(i,1);
-                    break;
-                }
-            }
-            // Callback
-            callback(users);
+        function deleteUserById(userId) {
+            var defer = $q.defer();
+            $http
+                .delete("/api/assignment/user/" + userId)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
-        /*
-         * @param   {int} userId        : id of user to update
-         * @param   {object} user       : user object containing new properties
-         * @param   {func} callback     : callback function to use
-         */
-        function updateUser(userId, user, callback) {
-            // Iterate over the users
-            for (var i = 0; i < users.length; i++) {
-                if (users[i]._id == userId) {
-                    user._id = userId;
-                    users[i] = user;
-
-                    // Callback
-                    callback(users[i]);
-                    break;
-                }
-            }
+        function updateUser(userId, userObj) {
+            var defer = $q.defer();
+            $http
+                .put("/api/assignment/user/" + userId, userObj)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
         }
 
     }
