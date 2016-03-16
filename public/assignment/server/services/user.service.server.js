@@ -12,7 +12,7 @@ module.exports = function(app, model) {
     app.delete("/api/assignment/user/:id", deleteUser);
 
     app.get("/api/assignment/user?username=username", findUserByUsername);
-    app.get("/api/assignment/user?username=alice&password=wonderland", findUserByCredentials);
+    app.get("/api/assignment/user?username=alice&password=alice", findUserByCredentials);
 
     // ------------------------------------------------------------------------
 

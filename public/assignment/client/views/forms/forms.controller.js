@@ -5,7 +5,7 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController($scope, $rootScope, $location, FormService) {
+    function FormController($scope, $rootScope, FormService) {
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
@@ -25,7 +25,8 @@
         function init() {
             // Fetch all the current forms available from the user
             FormService
-                .findAllFormsForUser(user._id, function(forms) {
+                .findAllFormsForUser(user._id)
+                .then(function(forms) {
                     $scope.forms = forms;
                 });
         }
@@ -40,9 +41,11 @@
             };
             // Add form for the user and update the view with the forms
             FormService
-                .createFormForUser(user._id, form, function(form) {
+                .createFormForUser(user._id, form)
+                .then(function(form) {
                     FormService
-                        .findAllFormsForUser(user._id, function(forms) {
+                        .findAllFormsForUser(user._id)
+                        .then(function(forms) {
                             $scope.forms = forms;
                         });
                 });
@@ -59,9 +62,11 @@
             };
             // Update form for the user and update the view
             FormService
-                .updateFormById($scope.selectedForm._id, form, function(form) {
+                .updateFormById($scope.selectedForm._id, form)
+                .then(function(form) {
                     FormService
-                        .findAllFormsForUser(user._id, function(forms) {
+                        .findAllFormsForUser(user._id)
+                        .then(function(forms) {
                             $scope.forms = forms;
                         });
                 });
@@ -73,9 +78,11 @@
         function deleteForm(index) {
             // Delete the selected form and update the view
             FormService
-                .deleteFormById($scope.forms[index]._id, function(forms) {
+                .deleteFormById($scope.forms[index]._id)
+                .then(function(forms) {
                     FormService
-                        .findAllFormsForUser(user._id, function(forms) {
+                        .findAllFormsForUser(user._id)
+                        .then(function(forms) {
                             $scope.forms = forms;
                         });
                 });

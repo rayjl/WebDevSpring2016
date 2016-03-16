@@ -14,7 +14,8 @@
          */
         function update(user) {
             UserService
-                .updateUser(user._id, user, function(user) {
+                .updateUser(user._id, user)
+                .then(function(user) {
                     alert('Profile updated.');
                 });
         }
