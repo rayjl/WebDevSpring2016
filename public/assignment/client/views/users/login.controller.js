@@ -14,9 +14,10 @@
          */
         function login(username, password) {
             UserService
+                //.findUserById(123)
                 .findUserByCredentials(username, password)
                 .then(function(user) {
-                    if (!user) {
+                    if (!user || user.length > 1) {
                         alert('Incorrect username or password.');
                     } else {
                         $rootScope.user = user;

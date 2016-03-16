@@ -6,13 +6,10 @@ module.exports = function(app, model) {
 
     // Add functionality current app
     app.post("/api/assignment/user", createUser);
-    app.get("/api/assignment/user", findAllUsers);
+    app.get("/api/assignment/user", findUsers);
     app.get("/api/assignment/user/:id", findUserById);
     app.put("/api/assignment/user/:id", updateUser);
     app.delete("/api/assignment/user/:id", deleteUser);
-
-    app.get("/api/assignment/user?username=username", findUserByUsername);
-    app.get("/api/assignment/user?username=alice&password=alice", findUserByCredentials);
 
     // ------------------------------------------------------------------------
 
@@ -20,8 +17,8 @@ module.exports = function(app, model) {
         var user = req.body;
         model
             .findUserByUsername(user.username)
-            .then(function(isUser) {
-                if (isUser) {
+            .then(function(user) {
+                if (user) {
                     res.json(null);
                 } else {
                     model
@@ -33,12 +30,33 @@ module.exports = function(app, model) {
             });
     }
 
-    function findAllUsers(req, res) {
-        model
-            .findAllUsers()
-            .then(function(users) {
-                res.json(users);
-            });
+    function findUsers(req, res) {
+        var username = req.query.username;
+        var password = req.query.password;
+
+        if (username && password) {
+            var credentials = {
+                username: req.query.username,
+                password: req.query.password
+            };
+            model
+                .findUserByCredentials(credentials)
+                .then(function(user) {
+                    res.json(user);
+                });
+        } else if (username) {
+            model
+                .findUserByUsername(username)
+                .then(function(user) {
+                    res.json(user);
+                });
+        } else {
+            model
+                .findAllUsers()
+                .then(function(users) {
+                    res.json(users);
+                });
+        }
     }
 
     function findUserById(req, res) {
@@ -66,27 +84,6 @@ module.exports = function(app, model) {
             .deleteUser(id)
             .then(function(users) {
                 res.json(users);
-            });
-    }
-
-    function findUserByUsername(req, res) {
-        var username = req.params.username;
-        model
-            .findUserByUsername(username)
-            .then(function(user) {
-                res.json(user);
-            });
-    }
-
-    function findUserByCredentials(req, res) {
-        var credentials = {
-            username: req.params.username,
-            password: req.params.password
-        };
-        model
-            .findUserByCredentials(credentials)
-            .then(function(user) {
-                res.json(user);
             });
     }
 
