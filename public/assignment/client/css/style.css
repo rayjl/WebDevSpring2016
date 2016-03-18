@@ -12,3 +12,7 @@
 .glyphicon-inviso {
     visibility : hidden;
 }
+
+#dialog {
+    display : none;
+}

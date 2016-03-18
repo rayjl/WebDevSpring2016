@@ -11,6 +11,7 @@
 
         // Create a container to return
         var service = {
+            findFormById: findFormById,
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
@@ -19,6 +20,16 @@
         return service;
 
         // --------------------------------------------------------------------
+
+        function findFormById(formId) {
+            var defer = $q.defer();
+            $http
+                .get("/api/assignment/form/" + formId)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
 
         function createFormForUser(userId, form) {
             var defer = $q.defer();

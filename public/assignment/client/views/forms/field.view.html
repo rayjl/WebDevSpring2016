@@ -1,5 +1,5 @@
 <!--Forms-Fields Title-->
-<h1 class="page-header">Forms : Registration Form</h1>
+<h1 class="page-header">{{form.title}}</h1>
 
 <!--Wrap it all in a form class-->
 <form class="form-horizontal">
@@ -11,151 +11,77 @@
     </ul>
 
     <!--Div data-->
-    <!--FirstName-->
-    <div class="row top-buffer">
-        <div class="col-xs-6">
-            <label for="firstName">First Name:</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <input ng-model="model.firstName" id="firstName" type="text" class="form-control" placeholder="First Name"/>
-        </div>
-        <div class="col-xs-6 text-right">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-remove"></span>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-        </div>
-    </div>
+    <div ng-repeat="field in fields" ng-switch on="field.type" class="form-group">
+        <label for="{{field.label}}" class="control-label">{{field.label}}</label>
+        <div class="row">
+            <div class="col-md-5 top-buffer">
 
-    <!--LastName-->
-    <div class="row top-buffer">
-        <div class="col-xs-6">
-            <label for="lastName">Last Name:</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <input ng-model="model.lastName" id="lastName" type="text" class="form-control" placeholder="Last Name"/>
-        </div>
-        <div class="col-xs-6 text-right">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-remove"></span>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-        </div>
-    </div>
-    <!--DateOfBirth-->
-    <div class="row top-buffer">
-        <div class="col-xs-6">
-            <label for="dob">Date Of Birth:</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <input ng-model="model.dateField" id="dob" type="date" class="form-control" placeholder="Select Date"/>
-        </div>
-        <div class="col-xs-6 text-right">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-remove"></span>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-        </div>
-    </div>
+                <!-- Text Input -->
+                <input ng-switch-when="TEXT" type="text" class="form-control" placeholder="{{field.placeholder}}">
 
-    <!--GenderDropDown-->
-    <div class="row top-buffer">
-        <div class="col-xs-6">
-            <label for="genderDropDown">Gender:</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6 dropdown">
-            <select ng-model="model.dropField" class="selectmenu" id="genderDropDown">
-                <option>Male</option>
-                <option>Female</option>
-            </select>
-        </div>
-        <div class="col-xs-6 text-right">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-remove"></span>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-        </div>
-    </div>
+                <!-- Textarea Input -->
+                <textarea ng-switch-when="TEXTAREA" class="form-control" rows="3" placeholder="{{field.placeholder}}"></textarea>
 
-    <!--CheckBoxes-->
-    <div class="row top-buffer">
-        <div class="col-xs-6">
-            <label for="rolesChecks">Roles:</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="checkbox" id="rolesChecks">
-                <label><input ng-model="model.checkAdmin" type="checkbox" value="">Admin</label>
+                <!-- Email Input -->
+                <input ng-switch-when="EMAIL" class="form-control" placeholder="{{field.placeholder}}">
+
+                <!-- Date -->
+                <input ng-switch-when="DATE" type="date" class="form-control">
+
+                <!-- Dropdown Options -->
+                <select ng-switch-when="OPTIONS" class="form-control">
+                    <option ng-repeat="option in field.options" value="{{option.value}}">
+                        {{option.label}}
+                    </option>
+                </select>
+
+                <!-- Checkboxes -->
+                <div ng-switch-when="CHECKBOXES" ng-repeat="option in field.options" class="checkbox">
+                    <label>
+                        <input type="checkbox" name="default" value="{{option.value}}">
+                        {{option.label}}
+                    </label>
+                </div>
+
+                <!-- Radio Buttons -->
+                <div ng-switch-when="RADIOS" ng-repeat="option in field.options" class="radio">
+                    <label>
+                        <input type="radio" name="default" value="{{option.value}}">
+                        {{option.label}}
+                    </label>
+                </div>
+
             </div>
-            <div class="checkbox">
-                <label><input ng-model="model.checkStudent" type="checkbox" value="">Student</label>
-            </div>
-            <div class="checkbox disabled">
-                <label><input ng-model="model.checkUser" type="checkbox" value="">User</label>
+
+            <!-- Action Buttons -->
+            <div class="col-sm-5 btn-group btn-group-sm" role="group">
+                <button ng-click="editField(field)"
+                        class="btn btn-default glyphicon glyphicon-pencil" title="Edit"></button>
+                <button ng-click="copyField(field)"
+                        class="btn btn-default glyphicon glyphicon-plus" title="Copy"></button>
+                <button ng-click="deleteField(field)"
+                        class="btn btn-default glyphicon glyphicon-remove" title="Delete"></button>
+                <button class="btn btn-default glyphicon glyphicon-align-justify" title="Sort"></button>
             </div>
         </div>
-        <div class="col-xs-6 text-right">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-remove"></span>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-        </div>
+
     </div>
 
-    <!--LicenseRadioButtons-->
-    <div class="row top-buffer">
-        <div class="col-xs-6">
-            <label for="licenseRadios">License Agreement:</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <div class="radio" id="licenseRadios">
-                <label><input ng-model="model.radioYes" type="radio" name="optradio">Yes</label>
+    <!-- Add New Field Selector -->
+    <hr>
+    <div class="form-group">
+        <label for="newField" class="control-label">Add New Field:</label>
+        <div class="row">
+            <div class="col-md-5">
+                <select ng-model="newField" class="form-control">
+                    <option ng-repeat="type in fieldTypes" value="{{type.value}}">{{type.text}}</option>
+                </select>
             </div>
-            <div class="radio">
-                <label><input ng-model="model.radioNo" type="radio" name="optradio">No</label>
+            <div class="col-sm-3">
+                <button ng-click="addField(newField)" class="btn btn-sm btn-default glyphicon glyphicon-plus" title="Add">
+                    <span class="sr-only">Add field</span>
+                </button>
             </div>
-        </div>
-        <div class="col-xs-6 text-right">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-remove"></span>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-        </div>
-    </div>
-
-    <!--AddNewField-->
-    <div class="row top-buffer-border">
-        <div class="col-xs-6">
-            <label for="newFieldDropDown">Add New Field:</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <select class="selectmenu" id="newFieldDropDown">
-                <option>Single Line Text Field</option>
-                <option>Date</option>
-                <option>Dropdown</option>
-                <option>Checkboxes</option>
-                <option>Radio buttons</option>
-                <option>Paragraph Text Field</option>
-            </select>
-        </div>
-        <div class="col-xs-6 text-right">
-            <span class="glyphicon glyphicon-pencil glyphicon-inviso"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-            <span class="glyphicon glyphicon-remove glyphicon-inviso"></span>
-            <span class="glyphicon glyphicon-menu-hamburger glyphicon-inviso"></span>
         </div>
     </div>
 
