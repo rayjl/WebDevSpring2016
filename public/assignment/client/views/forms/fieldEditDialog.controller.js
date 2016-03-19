@@ -14,18 +14,17 @@
         $scope.saveField = saveField;
 
         function saveField(fieldId, updatedField) {
-            console.log(formId);
-            console.log($scope.field);
-            console.log($scope.field.type);
             FieldService
                 .updateField(formId, fieldId, updatedField)
-                .then(function (fields) {
+                .then(function(fields) {
                     FieldService
                         .getFieldsForForm(formId)
-                        .then(function (fields) {
+                        .then(function(fields) {
                             $scope.fields = fields;
                         });
                 });
+            console.log(formId);
+            console.log($scope.fields);
         }
     }
 

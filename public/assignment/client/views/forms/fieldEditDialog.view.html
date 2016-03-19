@@ -1,10 +1,9 @@
 <!-- Edit Dialog Box -->
 <div class="ngdialog-message">
-    <div class="text-center">
 
-        <div class="form-group">
-            <h4 class="page-header">Edit Field:</h4>
+        <h4 class="page-header text-center">Edit Field:</h4>
 
+        <div class="form-group text-align-left">
             <!-- Label -->
             <div class="form-group">
                 <label for="label" class="col-sm-3 control-label">Label:</label>
@@ -29,11 +28,11 @@
                     <span class="help-block"><span class="glyphicon glyphicon-exclamation-sign"></span></span>
                 </div>
             </div>
+        </div>
 
+        <div class="text-center">
             <!-- Save or Cancel -->
             <button ng-click="saveField(field._id, updatedField); closeThisDialog()" class="btn btn-success" title="Edit">Ok</button>
             <button ng-click="closeThisDialog()" class="btn btn-danger" title="Edit">Cancel</button>
         </div>
-
-    </div>
 </div>
