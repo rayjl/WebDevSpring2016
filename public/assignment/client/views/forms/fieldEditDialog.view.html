@@ -13,7 +13,7 @@
             </div>
 
             <!-- Placeholder -->
-            <div ng-if="field.type == 'TEXT' || field.type == 'TEXTAREA'" class="form-group">
+            <div ng-if="field.type == 'TEXT' || field.type == 'TEXTAREA' || field.type == 'EMAIL'" class="form-group">
                 <label for="placeholder" class="col-sm-3 control-label">Placeholder:</label>
                 <div class="col-sm-9">
                     <input ng-model="updatedField.placeholder" type="text" id="placeholder" class="form-control" placeholder="New placeholder">
@@ -21,7 +21,7 @@
             </div>
 
             <!-- Options -->
-            <div ng-if="field.type == 'RADIO' || field.type == 'CHECKBOX' || field.type == 'SELECT'" class="form-group">
+            <div ng-if="field.type == 'RADIOS' || field.type == 'CHECKBOXES' || field.type == 'OPTIONS'" class="form-group">
                 <label for="options" class="col-sm-3 control-label">Options:</label>
                 <div class="col-sm-9">
                     <textarea ng-model="updatedField.options" id="options" class="form-control" rows="3" placeholder="LABEL:VALUE"></textarea>

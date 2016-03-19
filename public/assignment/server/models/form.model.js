@@ -162,12 +162,16 @@ module.exports = function() {
             if (forms[i]._id == formId) {
                 for (var j = 0; j < forms[i].fields.length; j++) {
                     if (forms[i].fields[j]._id == fieldId) {
-                        forms[i].fields[j].label = fieldObj.label;
-                        forms[i].fields[j].type = fieldObj.type;
-                        if (forms[i].fields[j].placeholder) {
+                        if (fieldObj.label) {
+                            forms[i].fields[j].label = fieldObj.label;
+                        }
+                        if (fieldObj.type) {
+                            forms[i].fields[j].type = fieldObj.type;
+                        }
+                        if (fieldObj.placeholder) {
                             forms[i].fields[j].placeholder = fieldObj.placeholder;
                         }
-                        if (forms[i].fields[j].options) {
+                        if (fieldObj.options) {
                             forms[i].fields[j].options = fieldObj.options;
                         }
                         defer.resolve(forms[i].fields);

@@ -20,9 +20,9 @@
             { value: "TEXT", text: "Single Line Text Field" },
             { value: "TEXTAREA", text: "Multi Line Text Field" },
             { value: "DATE", text: "Date Field" },
-            { value: "SELECT", text: "Dropdown Field" },
-            { value: "CHECKBOX", text: "Checkboxes Field" },
-            { value: "RADIO", text: "Radio Buttons Field" },
+            { value: "OPTIONS", text: "Dropdown Field" },
+            { value: "CHECKBOXES", text: "Checkboxes Field" },
+            { value: "RADIOS", text: "Radio Buttons Field" },
             { value: "EMAIL", text: "Email Field"}
         ];
 
@@ -85,10 +85,11 @@
 
             } else if (fieldType == "EMAIL") {
                 newField.label = "New Email";
-                newField.placehodler = "New Email";
+                newField.placeholder = "New Email";
 
             } else { // Text field if unsupported as default
-                newField.label = "New Text Field";
+                newField.type = "TEXT";
+                newField.label = "New Unknown Field";
                 newField.placeholder = "New unknown field";
             }
 
@@ -120,6 +121,7 @@
                 template: "./views/forms/fieldEditDialog.view.html",
                 controller: "FieldEditDialogController",
                 data: {
+                    pageScope : $scope,
                     formId : formId,
                     field : field,
                     fieldTypes : $scope.fieldTypes

@@ -5,8 +5,9 @@
         .module("FormBuilderApp")
         .controller("FieldEditDialogController", FieldEditDialogController);
 
-    function FieldEditDialogController($scope, FieldService) {
+    function FieldEditDialogController($scope, FieldService, $location) {
         var formId = $scope.ngDialogData.formId;
+        var pageScope = $scope.ngDialogData.pageScope;
 
         $scope.field = $scope.ngDialogData.field;
         $scope.fieldTypes = $scope.ngDialogData.fieldTypes;
@@ -20,11 +21,9 @@
                     FieldService
                         .getFieldsForForm(formId)
                         .then(function(fields) {
-                            $scope.fields = fields;
+                            pageScope.fields = fields;
                         });
                 });
-            console.log(formId);
-            console.log($scope.fields);
         }
     }
 
