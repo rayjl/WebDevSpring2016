@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module("FormBuilderApp")
+        .module("jgaSortable", [])
         .directive("jgaSortable", jgaSortable);
 
     function jgaSortable() {
