@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module("FormBuilderApp", ["ngRoute", "ngDialog"]);
+        .module("FormBuilderApp", ["ngRoute", "ngDialog", "jgaSortable"]);
 
 })();

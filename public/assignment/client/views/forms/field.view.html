@@ -11,61 +11,62 @@
     </ul>
 
     <!--Div data-->
-    <div ng-repeat="field in fields" ng-switch on="field.type" class="form-group">
-        <label for="{{field.label}}" class="control-label">{{field.label}}</label>
-        <div class="row">
-            <div class="col-md-5 top-buffer">
 
-                <!-- Text Input -->
-                <input ng-switch-when="TEXT" type="text" class="form-control" placeholder="{{field.placeholder}}">
+        <div ng-repeat="field in fields" ng-switch on="field.type" class="form-group">
+            <label for="{{field.label}}" class="control-label">{{field.label}}</label>
+            <div class="row">
+                <div class="col-md-5 top-buffer">
 
-                <!-- Textarea Input -->
-                <textarea ng-switch-when="TEXTAREA" class="form-control" rows="3" placeholder="{{field.placeholder}}"></textarea>
+                    <!-- Text Input -->
+                    <input ng-switch-when="TEXT" type="text" class="form-control" placeholder="{{field.placeholder}}">
 
-                <!-- Email Input -->
-                <input ng-switch-when="EMAIL" class="form-control" placeholder="{{field.placeholder}}">
+                    <!-- Textarea Input -->
+                    <textarea ng-switch-when="TEXTAREA" class="form-control" rows="3" placeholder="{{field.placeholder}}"></textarea>
 
-                <!-- Date -->
-                <input ng-switch-when="DATE" type="date" class="form-control">
+                    <!-- Email Input -->
+                    <input ng-switch-when="EMAIL" class="form-control" placeholder="{{field.placeholder}}">
 
-                <!-- Dropdown Options -->
-                <select ng-switch-when="OPTIONS" class="form-control">
-                    <option ng-repeat="option in field.options" value="{{option.value}}">
-                        {{option.label}}
-                    </option>
-                </select>
+                    <!-- Date -->
+                    <input ng-switch-when="DATE" type="date" class="form-control">
 
-                <!-- Checkboxes -->
-                <div ng-switch-when="CHECKBOXES" ng-repeat="option in field.options" class="checkbox">
-                    <label>
-                        <input type="checkbox" name="default" value="{{option.value}}">
-                        {{option.label}}
-                    </label>
+                    <!-- Dropdown Options -->
+                    <select ng-switch-when="OPTIONS" class="form-control">
+                        <option ng-repeat="option in field.options" value="{{option.value}}">
+                            {{option.label}}
+                        </option>
+                    </select>
+
+                    <!-- Checkboxes -->
+                    <div ng-switch-when="CHECKBOXES" ng-repeat="option in field.options" class="checkbox">
+                        <label>
+                            <input type="checkbox" name="default" value="{{option.value}}">
+                            {{option.label}}
+                        </label>
+                    </div>
+
+                    <!-- Radio Buttons -->
+                    <div ng-switch-when="RADIOS" ng-repeat="option in field.options" class="radio">
+                        <label>
+                            <input type="radio" name="default" value="{{option.value}}">
+                            {{option.label}}
+                        </label>
+                    </div>
+
                 </div>
 
-                <!-- Radio Buttons -->
-                <div ng-switch-when="RADIOS" ng-repeat="option in field.options" class="radio">
-                    <label>
-                        <input type="radio" name="default" value="{{option.value}}">
-                        {{option.label}}
-                    </label>
+                <!-- Action Buttons -->
+                <div class="col-sm-5 btn-group btn-group-sm" role="group">
+                    <button ng-click="editField(field)"
+                            class="btn btn-default glyphicon glyphicon-pencil" title="Edit"></button>
+                    <button ng-click="copyField(field)"
+                            class="btn btn-default glyphicon glyphicon-plus" title="Copy"></button>
+                    <button ng-click="deleteField(field)"
+                            class="btn btn-default glyphicon glyphicon-remove" title="Delete"></button>
+                    <button class="btn btn-default glyphicon glyphicon-align-justify" title="Sort"></button>
                 </div>
-
             </div>
 
-            <!-- Action Buttons -->
-            <div class="col-sm-5 btn-group btn-group-sm" role="group">
-                <button ng-click="editField(field)"
-                        class="btn btn-default glyphicon glyphicon-pencil" title="Edit"></button>
-                <button ng-click="copyField(field)"
-                        class="btn btn-default glyphicon glyphicon-plus" title="Copy"></button>
-                <button ng-click="deleteField(field)"
-                        class="btn btn-default glyphicon glyphicon-remove" title="Delete"></button>
-                <button class="btn btn-default glyphicon glyphicon-align-justify" title="Sort"></button>
-            </div>
         </div>
-
-    </div>
 
     <!-- Add New Field Selector -->
     <hr>
