@@ -15,7 +15,7 @@
         <tbody id="tbody-sortable" jga-sortable jga-axis="y">
             <tr ng-repeat="field in fields" ng-switch on="field.type" class="form-group">
                 <td>
-                    <label for="{{field.label}}" class="control-label">{{field.label}}</label>
+                    <label class="control-label">{{field.label}}</label>
                     <div class="row">
                         <div class="col-md-5 top-buffer">
 
@@ -76,7 +76,7 @@
         <tbody>
             <tr class="form-group">
                 <td>
-                    <label for="newField" class="control-label">Add New Field:</label>
+                    <label class="control-label">Add New Field:</label>
                     <div class="row">
                         <div class="col-md-5">
                             <select ng-model="newField" class="form-control">
