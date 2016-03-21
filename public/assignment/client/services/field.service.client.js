@@ -14,7 +14,8 @@
             getFieldsForForm: getFieldsForForm,
             getFieldForForm: getFieldForForm,
             deleteFieldFromForm: deleteFieldFromForm,
-            updateField: updateField
+            updateField: updateField,
+            updateAllFields: updateAllFields
         };
         return service;
 
@@ -64,6 +65,16 @@
             var defer = $q.defer();
             $http
                 .put("/api/assignment/form/" + formId + "/field/" + fieldId, field)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function updateAllFields(formId, fields) {
+            var defer = $q.defer();
+            $http
+                .put("/api/assignment/form/" + formId + "/field/", fields)
                 .success(function(response) {
                     defer.resolve(response);
                 });

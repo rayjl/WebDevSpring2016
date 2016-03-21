@@ -12,8 +12,19 @@ module.exports = function(app, model) {
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteField);
     app.post("/api/assignment/form/:formId/field", createField);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateField);
+    app.put("/api/assignment/form/:formId/field", updateAllFields);
 
     // ------------------------------------------------------------------------
+
+    function updateAllFields(req, res) {
+        var formId = req.params.formId;
+        var fields = req.body;
+        model
+            .updateAllFields(formId, fields)
+            .then(function(fields) {
+                res.json(fields);
+            });
+    }
 
     function findAllFields(req, res) {
         var formId = req.params.formId;

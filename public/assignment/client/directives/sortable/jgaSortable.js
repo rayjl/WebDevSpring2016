@@ -10,11 +10,12 @@
         var end = null;
         function link(scope, element, attributes) {
             var jgaAxis = attributes.jgaAxis;
-            
+
             $(element).sortable({
+                handle: '#sortButton',
+                cancel: '',
                 axis: jgaAxis,
                 start: function(event, ui) {
-                    console.log(event);
                     start = ui.item.index();
                 },
                 stop: function(event, ui) {
@@ -23,6 +24,8 @@
                     scope.fields[start] = scope.fields[end];
                     scope.fields[end] = temp;
                     scope.$apply();
+                    scope.updateAllFields(scope.formId, scope.fields);
+                    console.log(scope.fields);
                 }
             });
         }

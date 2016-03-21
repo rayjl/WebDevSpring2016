@@ -10,10 +10,14 @@
         $scope.deleteField = deleteField;
         $scope.editField = editField;
         $scope.copyField = copyField;
+        $scope.updateAllFields = updateAllFields;
 
         // Use $routeParams to extract out the user and form id
         var userId = $routeParams["userId"];
         var formId = $routeParams["formId"];
+
+        $scope.userId = userId;
+        $scope.formId = formId;
 
         // Field type variable added to scope
         $scope.fieldTypes = [
@@ -138,6 +142,14 @@
                         .then(function(fields) {
                             $scope.fields = fields;
                         });
+                });
+        }
+
+        function updateAllFields(formId, fields) {
+            FieldService
+                .updateAllFields(formId, fields)
+                .then(function(fields) {
+                    console.log('All fields updated.');
                 });
         }
 

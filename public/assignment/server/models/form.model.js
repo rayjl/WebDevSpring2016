@@ -17,7 +17,8 @@ module.exports = function() {
         findFieldById: findFieldById,
         deleteField: deleteField,
         createField: createField,
-        updateField: updateField
+        updateField: updateField,
+        updateAllFields: updateAllFields
     };
     return api;
 
@@ -182,6 +183,17 @@ module.exports = function() {
         }
         defer.resolve(null);
         return defer.promise;
+    }
+
+    function updateAllFields(formId, fields) {
+        var defer = q.defer();
+        for (var i = 0; i < forms.length; i++) {
+            if (forms[i]._id == formId) {
+                forms[i].fields = fields;
+                defer.resolve(forms[i].fields = fields);
+                return defer.promise;
+            }
+        }
     }
 
 };
