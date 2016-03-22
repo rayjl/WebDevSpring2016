@@ -82,17 +82,7 @@
          * @param   {object} secondUser : user to add to following
          * @param   {func} callback     : callback function
          */
-        function addFollowing(firstUser, secondUser, callback) {
-
-
-        }
-
-        /*
-         * @param   {object} firstUser  : main user
-         * @param   {object} secondUser : user to add to follower
-         * @param   {func} callback     : callback function
-         */
-        function addFollower(firstUser, secondUser, callback) {
+        function addFollowing(user, userToFollow, callback) {
 
 
         }

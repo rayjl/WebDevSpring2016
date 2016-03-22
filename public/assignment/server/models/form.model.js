@@ -5,6 +5,8 @@ module.exports = function() {
 
     var forms = require('./form.mock.json');
 
+    // ------------------------------------------------------------------------
+
     var api = {
         createFormForUser: createFormForUser,
         findAllForms: findAllForms,
@@ -21,6 +23,8 @@ module.exports = function() {
         updateAllFields: updateAllFields
     };
     return api;
+
+    // ------------------------------------------------------------------------
 
     function createFormForUser(formObj) {
         var defer = q.defer();

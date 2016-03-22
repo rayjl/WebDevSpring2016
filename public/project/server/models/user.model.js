@@ -5,8 +5,6 @@ module.exports = function() {
 
     var users = require('./user.mock.json');
 
-    // ------------------------------------------------------------------------
-
     var api = {
         createUser: createUser,
         findAllUsers: findAllUsers,
@@ -14,11 +12,41 @@ module.exports = function() {
         updateUser: updateUser,
         deleteUser: deleteUser,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        addFollowing: addFollowing,
+        deleteFollowingById: deleteFollowingById
     };
     return api;
 
     // ------------------------------------------------------------------------
+
+    function addFollowing(user, userToFollow) {
+        var defer = q.defer();
+        user.following.push(userToFollow._id);
+        userToFollow.followers.push(user._id);
+        defer.resolve(user);
+        return defer.promise;
+    }
+
+    function deleteFollowingById(user, followingId) {
+        var defer = q.defer();
+        var following = user.following;
+        for (var i = 0; i < following.length; i++) {
+            var currFollowing = following[i];
+            if (currFollowing._id == followingId) {
+                user.following.splice(i,1);
+                for (var j = 0; j < currFollowing.followers.length; j++) {
+                    if (currFollowing.followers[j]._id == user._id) {
+                        currFollowing.followers.splice(j,1);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        defer.resolve(user);
+        return defer.promise;
+    }
 
     function createUser(userObject) {
         var defer = q.defer();

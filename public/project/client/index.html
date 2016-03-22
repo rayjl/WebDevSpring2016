@@ -10,10 +10,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ngDialog.css">
+    <link rel="stylesheet" href="css/ngDialog-theme-default.css">
+
+    <!--jQuery-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+
+    <!--Bootstrap-->
+    <script src="js/bootstrap.min.js"></script>
 
     <!--AngularJS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="directives/sortable/zapSortable.js"></script>
+    <script src="js/ngDialog.js"></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
 
@@ -38,24 +49,21 @@
 <!--Body Section-->
 <body ng-controller="MainController">
 
-<!--Top Nav Bar-->
-<nav ng-include src="'views/header/header.view.html'"></nav>
+    <!--Top Nav Bar-->
+    <nav ng-include src="'views/header/header.view.html'"></nav>
 
-<!--Main Content-->
-<div class="container-fluid">
-    <div class="row">
+    <!--Main Content-->
+    <div class="container-fluid">
+        <div class="row">
 
-        <!--Side Nav Bar-->
-        <div ng-include src="'views/sidebar/sidebar.view.html'"></div>
+            <!--Side Nav Bar-->
+            <div ng-include src="'views/sidebar/sidebar.view.html'"></div>
 
-        <!--Body-->
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view></div>
+            <!--Body-->
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view></div>
 
+        </div>
     </div>
-</div>
 
-<!-- Bootstrap core JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
