@@ -1,0 +1,26 @@
+[
+  {
+    "_id"           : 1,
+    "street"        : "12345 Street",
+    "city"          : "A-City",
+    "state"         : "Orb",
+    "zestimate"     : 5000000,
+    "details"       : []
+  },
+  {
+    "_id"           : 2,
+    "street"        : "12345 Street",
+    "city"          : "B-City",
+    "state"         : "Orb",
+    "zestimate"     : 10000000,
+    "details"       : []
+  },
+  {
+    "_id": 3,
+    "street": "12345 Street",
+    "city": "C-City",
+    "state": "Orb",
+    "zestimate": 15000000,
+    "details": []
+  }
+]

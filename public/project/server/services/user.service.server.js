@@ -5,13 +5,13 @@ module.exports = function(app, model) {
     // ------------------------------------------------------------------------
 
     // Add functionality current app
-    app.post("/api/assignment/user", createUser);
-    app.get("/api/assignment/user", findUsers);
-    app.get("/api/assignment/user/:id", findUserById);
-    app.put("/api/assignment/user/:id", updateUser);
-    app.delete("/api/assignment/user/:id", deleteUser);
-    app.post("/api/assignment/user/:id/following", addFollowing);
-    app.delete("/api/assignment/user/:id/following/:fid", deleteFollowing);
+    app.post("/api/project/user", createUser);
+    app.get("/api/project/user", findUsers);
+    app.get("/api/project/user/:id", findUserById);
+    app.put("/api/project/user/:id", updateUser);
+    app.delete("/api/project/user/:id", deleteUser);
+    app.post("/api/project/user/:id/following", addFollowing);
+    app.delete("/api/project/user/:id/following/:fid", deleteFollowing);
 
     // ------------------------------------------------------------------------
 

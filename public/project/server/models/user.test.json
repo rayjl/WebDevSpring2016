@@ -1,44 +1,46 @@
-var admin = {
-"_id"           : 888,
-"firstName"     : "Raymond",
-"lastName"      : "Li",
-"username"      : "admin",
-"password"      : "admin",
-"accountType"   : "admin",
-"following"     : [],
-"followers"     : [],
-"savedListings" : []
-};
-var alice = {
-"_id"           : 123,
-"firstName"     : "Alice",
-"lastName"      : "Wonderland",
-"username"      : "alice",
-"password"      : "alice",
-"accountType"   : "user",
-"following"     : [],
-"followers"     : [],
-"savedListings" : []
-};
-var bob = {
-"_id"           : 234,
-"firstName"     : "Bob",
-"lastName"      : "Hope",
-"username"      : "bob",
-"password"      : "bob",
-"accountType"   : "user",
-"following"     : [],
-"followers"     : [],
-"savedListings" : []
-};
-var charlie = {
-"_id"           : 345,
-"firstName"     : "Charlie",
-"lastName"      : "Brown",
-"username"      : "charlie",
-"password"      : "charlie",
-"accountType"   : "user",
-"following"     : [],
-"followers"     : [],
-"savedListings" : []
-};
+[
+  {
+    "_id"           : 888,
+    "firstName"     : "admin",
+    "lastName"      : "admin",
+    "username"      : "admin",
+    "password"      : "admin",
+    "accountType"   : "admin",
+    "following"     : [],
+    "followers"     : [],
+    "savedListings" : []
+  },
+  {
+    "_id"           : 123,
+    "firstName"     : "Alice",
+    "lastName"      : "Wonderland",
+    "username"      : "alice",
+    "password"      : "alice",
+    "accountType"   : "user",
+    "following"     : [],
+    "followers"     : [],
+    "savedListings" : []
+  },
+  {
+    "_id"           : 234,
+    "firstName"     : "Bob",
+    "lastName"      : "Hope",
+    "username"      : "bob",
+    "password"      : "bob",
+    "accountType"   : "user",
+    "following"     : [],
+    "followers"     : [],
+    "savedListings" : []
+  },
+  {
+    "_id"           : 345,
+    "firstName"     : "Charlie",
+    "lastName"      : "Brown",
+    "username"      : "charlie",
+    "password"      : "charlie",
+    "accountType"   : "user",
+    "following"     : [],
+    "followers"     : [],
+    "savedListings" : []
+  }
+]
