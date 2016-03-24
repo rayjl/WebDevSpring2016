@@ -14,5 +14,6 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 // Require the other app files...
 require("./public/assignment/server/app.js")(app);
+require("./public/project/server/app.js")(app);
 
 app.listen(port, ipaddress);
