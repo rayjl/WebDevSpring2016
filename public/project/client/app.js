@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module("ZapApp", ["ngRoute"]);
+        .module("ZapApp", ["ngRoute", "ngDialog", "zapSortable"]);
 
 })();

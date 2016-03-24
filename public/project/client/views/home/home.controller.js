@@ -27,8 +27,9 @@
          */
         function saveListing(index) {
             DataService
-                .addSavedListing($scope.listings[index], function(listings) {
-
+                .addSavedListing($scope.listings[index])
+                .then(function(listings) {
+                    console.log(listings);
                 });
         }
 

@@ -22,7 +22,8 @@
 
             // Create a new user using the user service factory
             UserService
-                .createUser(newUser, function(user) {
+                .createUser(newUser)
+                .then(function(user) {
                     $rootScope.user = user;
                     $location.url('/profile');
                 });

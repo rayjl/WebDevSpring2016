@@ -5,7 +5,7 @@
         .module("ZapApp")
         .controller("AdminController", AdminController);
 
-    function AdminController($scope, $rootScope, $location, UserService) {
+    function AdminController($scope, $rootScope, UserService) {
         $scope.addUser = addUser;
         $scope.updateUser = updateUser;
         $scope.removeUser = removeUser;
@@ -24,7 +24,8 @@
          */
         function init() {
             UserService
-                .findAllUsers(function(users) {
+                .findAllUsers()
+                .then(function(users) {
                     $scope.users = users;
                 });
         }
@@ -50,11 +51,13 @@
 
             // Create a new user using the user service factory
             UserService
-                .createUser(newUser, function(user) {
+                .createUser(newUser)
+                .then(function(user) {
                     UserService
-                        .findAllUsers(function(users) {
+                        .findAllUsers()
+                        .then(function(users) {
                             $scope.users = users;
-                        })
+                        });
                 });
         }
 
@@ -63,12 +66,13 @@
          */
         function updateUser(selectedUser) {
             UserService
-                .updateUser(selectedUser._id, selectedUser, function(user) {
+                .updateUser(selectedUser._id, selectedUser)
+                .then(function(user) {
                     UserService
                         .findAllUsers(function(users) {
                             $scope.users = users;
-                        })
-                })
+                        });
+                });
         }
 
         /*
@@ -77,9 +81,10 @@
         function removeUser(index) {
             if ($scope.users[index] != user) {
                 UserService
-                    .deleteUserById($scope.users[index]._id, function(users) {
+                    .deleteUserById($scope.users[index]._id)
+                    .then(function(users) {
                         $scope.users = users;
-                    })
+                    });
             }
         }
 

@@ -20,7 +20,8 @@
             var listings = [];
             for (var i = 0; i < user.savedListings.length; i++) {
                 DataService
-                    .findSavedListingById(user.savedListings[i]._id, function(listing) {
+                    .findSavedListingById(user.savedListings[i]._id)
+                    .then(function(listing) {
                         listings.push(listing);
                     });
             }
@@ -32,7 +33,8 @@
          */
         function removeListing(index) {
             DataService
-                .deleteSavedListingById($scope.listings[index]._id, function(listings) {
+                .deleteSavedListingById($scope.listings[index]._id)
+                .then(function(listings) {
                    $scope.listings = listings;
                 });
             user.savedListings.splice(index,1);

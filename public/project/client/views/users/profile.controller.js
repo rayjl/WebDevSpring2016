@@ -30,7 +30,9 @@
         function update(user, vPassword) {
             if (user.password == vPassword) {
                 UserService
-                    .updateUser(user._id, user, function (user) {
+                    .updateUser(user._id, user)
+                    .then(function (user) {
+                        console.log(user);
                         alert('Profile updated.');
                     });
             } else {

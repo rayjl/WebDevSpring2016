@@ -32,7 +32,8 @@
         function deleteFollowing(index) {
             // Delete the user from the view and the user object
             UserService
-                .deleteFollowingById($scope.user, $scope.following[index]._id, function(user) {
+                .deleteFollowingById($scope.user, $scope.following[index]._id)
+                .then(function(user) {
                     $scope.user = user;
                     $scope.following = $scope.user.following;
                     $scope.followers = $scope.user.followers;
@@ -45,7 +46,8 @@
         function deleteFollower(index) {
             // Delete the user from the view and the user object
             UserService
-                .deleteFollowerById($scope.user, $scope.followers[index]._id, function(user) {
+                .deleteFollowerById($scope.user, $scope.followers[index]._id)
+                .then(function(user) {
                     $scope.user = user;
                     $scope.following = $scope.user.following;
                     $scope.followers = $scope.user.followers;
