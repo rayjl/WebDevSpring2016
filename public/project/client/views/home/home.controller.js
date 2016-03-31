@@ -44,23 +44,50 @@
             if (searchString == undefined || searchString.length == 0) {
                 $scope.listings = [];
                 setSearchState(false);
+
             } else {
-                // Parse search string and create API fetch string
 
+                // Check that the search string is valid format
+                var arr = searchString.split(',');
+                if (arr.length < 3) {
+                    alert('Please enter an address, city, state and zip to search.');
 
-
-                // API fetch request here
-                var newListings = [];
-
-
-
-                // Set the search state of the page and the new listings returned
-                if (newListings.length > 0) {
-                    $scope.listings = newListings;
-                    setSearchState(true);
                 } else {
-                    $scope.listings = [];
-                    setSearchState(true);
+
+                    // address
+                    var address = arr[0].trim().split(' ').join('+');
+
+                    // citystatezip
+                    var city = arr[1].trim() + '%2C';
+                    var statezip = arr[2].trim();
+                    var citystatezip = city + '+' + statezip.split(' ').join('+');
+
+                    // Data Fetch
+                    DataService
+                        .zillowFetch(address, citystatezip)
+                        .then(function (results) {
+
+                            // Fetched results in XML format
+                            var xmlResults = results;
+                            console.log(xmlResults);
+
+                            // Convert data to JSON format
+                            var jsonResults = $.xml2json(xmlResults);
+                            console.log(jsonResults);
+
+                            // Add fetched data to new listing
+                            var newListing = [];
+
+                            // Set the search state of the page and the new listings returned
+                            if (newListing.length > 0) {
+                                $scope.listings = newListing;
+                                setSearchState(true);
+                            } else {
+                                $scope.listings = [];
+                                setSearchState(true);
+                            }
+
+                        });
                 }
             }
         }

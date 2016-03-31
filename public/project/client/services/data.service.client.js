@@ -14,11 +14,22 @@
             addSavedListing: addSavedListing,
             findAllSavedListings: findAllSavedListings,
             findSavedListingById: findSavedListingById,
-            deleteSavedListingById: deleteSavedListingById
+            deleteSavedListingById: deleteSavedListingById,
+            zillowFetch: zillowFetch
         };
         return service;
 
         // --------------------------------------------------------------------
+
+        function zillowFetch(address, citystatezip) {
+            var defer = $q.defer();
+            $http
+                .get("/api/project/data/" + address + "/" + citystatezip)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
 
         function addSavedListing(listing) {
             var defer = $q.defer();

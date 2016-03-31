@@ -5,12 +5,12 @@
         .module("ZapApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location, UserService) {
+    function HeaderController($scope, $rootScope, $location) {
         $scope.location = $location;
         $scope.logout = logout;
 
         function logout() {
-            UserService.setCurrentUser(null);
+            $rootScope.user = null;
             $location.url("/home");
         }
     }
