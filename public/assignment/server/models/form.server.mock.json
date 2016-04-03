@@ -1,0 +1,29 @@
+[
+  {
+    "_id": "00000",
+    "userId": "123",
+    "title": "Test Form",
+    "fields":
+            [
+              {
+                "_id": "12345",
+                "label": "First Name",
+                "type": "TEXT",
+                "placeholder": "Alice",
+                "options":
+                        [
+                          {
+                            "label": "Male",
+                            "value": "MALE"
+                          },
+                          {
+                            "label": "Female",
+                            "value": "FEMALE"
+                          }
+                        ]
+              }
+            ],
+    "created": "1459643943195",
+    "updated": "1459643943195"
+  }
+]

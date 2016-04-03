@@ -24,7 +24,7 @@
         function zillowFetch(address, citystatezip) {
             var defer = $q.defer();
             $http
-                .get("/api/project/data/" + address + "/" + citystatezip)
+                .get("/rest/data/" + address + "/" + citystatezip)
                 .success(function(response) {
                     defer.resolve(response);
                 });

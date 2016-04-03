@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "123",
+    "username": "alice",
+    "password": "p@ssw0rd",
+    "firstName": "Alice",
+    "lastName": "Wonderland",
+    "emails": ["alice@wonderland.com", "alice@gmail.com"],
+    "phones": ["123-234-4321", "234-432-2344"]
+  }
+]

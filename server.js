@@ -13,19 +13,39 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // ----------------------------------------------------------------------------
 
 // Multer
-//var multer = require('multer');
-//app.use(multer());
+var multer = require('multer');
+app.use(multer());
 
 // ----------------------------------------------------------------------------
 
-// Connection
+// MongoDB
+var mongoose = require('mongoose');
+
+// localhost connection
+var connectionString = 'mongodb://localhost/cs5610';
+
+// OpenShift connection
+if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+
+// db connection instance
+var db = mongoose.connect(connectionString);
+
+// ----------------------------------------------------------------------------
+
+// Application Connection
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 // ----------------------------------------------------------------------------
 
 // Require the other app files...
-require("./public/assignment/server/app.js")(app);
+require("./public/assignment/server/app.js")(app, mongoose);
 require("./public/project/server/app.js")(app);
 
 // ----------------------------------------------------------------------------

@@ -1,8 +1,7 @@
 'use strict';
 
 // Http Proxy
-var httpProxy = require('http-proxy');
-var apiProxy = httpProxy.createProxyServer();
+var http = require('http');
 
 module.exports = function(app, model) {
 
@@ -13,7 +12,7 @@ module.exports = function(app, model) {
     app.get("/api/project/listing", findAllSavedListings);
     app.get("/api/project/listing/:listingId", findSavedListingById);
     app.delete("/api/project/listing/:listingId", deleteSavedListingById);
-    app.get("/api/project/data/:address/:citystatezip", zillowFetch);
+    app.get("/rest/data/:address/:citystatezip", zillowFetch);
 
     // ------------------------------------------------------------------------
 
@@ -27,22 +26,28 @@ module.exports = function(app, model) {
         var citystatezip = req.params.citystatezip;
 
         // Api url
-        //var address = '2114+bigelow+ave';
-        //var citystatezip = 'seattle%2C+wa';
-        var apiForwardingUrl = 'http://www.zillow.com/webservice/GetSearchResults.htm?'
+        var host = 'http://www.zillow.com';
+        var path = '/webservice/GetSearchResults.htm?'
             + 'zws-id='
             + apiKey
             + '&address='
             + address
             + '&citystatezip='
             + citystatezip;
-
+        var apiForwardingUrl = host + path;
         console.log(apiForwardingUrl);
 
-
-        // DEBUG SOMETHING WRONG WITH THIS PROXY CALL - KEEPS APPENDING ON OTHER STUFF TO END
-
-        return apiProxy.web(req, res, {target : apiForwardingUrl});
+        // Callback function for api response
+        var callback = function(response) {
+            var str= '';
+            response.on('data', function(chunk) {
+                str += chunk;
+            });
+            response.on('end', function() {
+                res.send(str);
+            });
+        };
+        http.request(apiForwardingUrl, callback).end();
     }
 
     function addSavedListing(req, res) {
