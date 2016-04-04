@@ -12,9 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // ----------------------------------------------------------------------------
 
-//// Multer
-//var multer = require('multer');
-//app.use(multer());
+// Multer
+var multer = require('multer');
+app.use(multer());
 
 // ----------------------------------------------------------------------------
 

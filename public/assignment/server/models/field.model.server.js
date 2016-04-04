@@ -1,13 +1,11 @@
 'use strict';
 var q = require('q');
 
-module.exports = function(mongoose) {
+module.exports = function(mongoose, FormModel) {
 
     // ------------------------------------------------------------------------
 
     // Mongoose and MongoDB used
-    var FormSchema = require("./form.schema.server.js")(mongoose);
-    var FormModel = mongoose.model("FormModel", FormSchema);
     var FieldSchema = require("./field.schema.server.js")(mongoose);
     var FieldModel = mongoose.model("FieldModel", FieldSchema);
 

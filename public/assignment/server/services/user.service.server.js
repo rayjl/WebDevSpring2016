@@ -17,8 +17,8 @@ module.exports = function(app, model) {
         var user = req.body;
         model
             .findUserByUsername(user.username)
-            .then(function(user) {
-                if (user) {
+            .then(function(dbUser) {
+                if (dbUser) {
                     res.json(null);
                 } else {
                     model

@@ -26,6 +26,15 @@ module.exports = function(mongoose) {
 
     function createUser(userObject) {
         var defer = q.defer();
+
+        // Handle the user object
+        userObject.emails = [userObject.email];
+        delete userObject.email;
+        userObject.firstName = "";
+        userObject.lastName = "";
+        userObject.phones = [""];
+
+        console.log(userObject);
         UserModel
             .create(userObject, function(err, user) {
                 if (err) {
@@ -109,6 +118,7 @@ module.exports = function(mongoose) {
         var defer = q.defer();
         UserModel
             .findOne({username: credentials.username, password: credentials.password}, function (err, user) {
+                console.log(user);
                 if (err) {
                     defer.reject(err);
                 } else {

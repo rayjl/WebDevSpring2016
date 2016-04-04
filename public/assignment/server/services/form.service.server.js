@@ -46,10 +46,13 @@ module.exports = function(app, model) {
         var userId = req.params.userId;
         var form = req.body;
         form.userId = userId;
-        form._id = uuid.v1();
+        form.fields = [];
+        form.created = Date.now().toString();
+        form.updated = Date.now().toString();
         model
             .createFormForUser(form)
             .then(function(forms) {
+                console.log('Create form response sending.');
                 res.json(forms);
             });
     }

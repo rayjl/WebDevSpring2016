@@ -20,6 +20,7 @@
                     if (!user || user.length > 1) {
                         alert('Incorrect username or password.');
                     } else {
+                        console.log(user);
                         $rootScope.user = user;
                         $location.url('/profile');
                     }
