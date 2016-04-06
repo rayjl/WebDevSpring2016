@@ -26,18 +26,15 @@ module.exports = function(mongoose) {
 
     function createFormForUser(formObj) {
         var defer = q.defer();
-        console.log(formObj);
         FormModel
             .create(formObj, function(err, form) {
-                console.log("Form creation callback.");
-                console.log(form);
-                if (err || findFormByTitle(form.userId, form.title)) {
+                if (err) {
                     defer.reject(err);
-                } else {
-                    console.log("Form created.");
-                    defer.resolve(findFormsByUserId(form.userId));
                 }
             });
+        var forms = findFormsByUserId(formObj.userId);
+        console.log(forms);
+        defer.resolve(forms);
         return defer.promise;
     }
 
@@ -74,10 +71,11 @@ module.exports = function(mongoose) {
             .update({_id: formId}, {$set: formObj}, function(err, form) {
                 if (err) {
                     defer.reject(err);
-                } else {
-                    defer.resolve(findFormsByUserId(form.userId));
                 }
             });
+        var forms = findFormsByUserId(formObj.userId);
+        console.log(forms);
+        defer.resolve(forms);
         return defer.promise;
     }
 
@@ -109,8 +107,11 @@ module.exports = function(mongoose) {
 
     function findFormsByUserId(userId) {
         var defer = q.defer();
+        console.log("Finding forms by user.");
         FormModel
             .find({userId: userId}, function(err, forms) {
+                console.log(err);
+                console.log(forms);
                 if (err) {
                     defer.reject(err);
                 } else {

@@ -118,7 +118,6 @@ module.exports = function(mongoose) {
         var defer = q.defer();
         UserModel
             .findOne({username: credentials.username, password: credentials.password}, function (err, user) {
-                console.log(user);
                 if (err) {
                     defer.reject(err);
                 } else {

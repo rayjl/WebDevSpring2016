@@ -1,6 +1,5 @@
 [
   {
-    "_id": "123",
     "username": "alice",
     "password": "p@ssw0rd",
     "firstName": "Alice",

@@ -52,7 +52,6 @@ module.exports = function(app, model) {
         model
             .createFormForUser(form)
             .then(function(forms) {
-                console.log('Create form response sending.');
                 res.json(forms);
             });
     }

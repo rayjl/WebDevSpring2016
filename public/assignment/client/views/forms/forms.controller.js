@@ -12,6 +12,10 @@
         $scope.selectForm = selectForm;
         var user = $rootScope.user;
 
+
+
+
+
         // Execute init to fetch forms if user valid
         if (user) {
             init();
@@ -27,6 +31,7 @@
             FormService
                 .findAllFormsForUser(user._id)
                 .then(function(forms) {
+                    console.log("Init.");
                     $scope.forms = forms;
                 });
         }
@@ -40,16 +45,10 @@
                 title: formName
             };
             // Add form for the user and update the view with the forms
-            console.log(user);
             FormService
                 .createFormForUser(user._id, form)
                 .then(function(form) {
-                    console.log('Form created.');
-                    FormService
-                        .findAllFormsForUser(user._id)
-                        .then(function(forms) {
-                            $scope.forms = forms;
-                        });
+                    init();
                 });
         }
 
