@@ -54,7 +54,7 @@ module.exports = function(mongoose) {
     function findFormById(formId) {
         var defer = q.defer();
         FormModel
-            .findById(formId, function(err, form) {
+            .find({_id: formId}, function(err, form) {
                 if (err) {
                     defer.reject(err);
                 } else {

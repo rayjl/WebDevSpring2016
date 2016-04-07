@@ -12,10 +12,6 @@
         $scope.selectForm = selectForm;
         var user = $rootScope.user;
 
-
-
-
-
         // Execute init to fetch forms if user valid
         if (user) {
             init();
