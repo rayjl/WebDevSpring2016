@@ -25,9 +25,8 @@ module.exports = function(mongoose, FormModel) {
 
     function findAllFields(formId) {
         var defer = q.defer();
-        console.log("field.model.server - findAllFields for " + formId);
         FormModel
-            .find({_id: formId}, function(err, form) {
+            .findFormById({_id: formId}, function(err, form) {
                 defer.resolve(form.fields);
             });
         return defer.promise;
@@ -36,7 +35,7 @@ module.exports = function(mongoose, FormModel) {
     function findFieldById(formId, fieldId) {
         var defer = q.defer();
         FormModel
-            .find({_id: formId}, function(err, form) {
+            .findFormById({_id: formId}, function(err, form) {
                 var fields = form.fields;
                 for (var i = 0; i < fields.length; i++) {
                     if (fields[i]._id == fieldId) {
@@ -50,7 +49,7 @@ module.exports = function(mongoose, FormModel) {
     function deleteField(formId, fieldId) {
         var defer = q.defer();
         FormModel
-            .find({_id: formId}, function(err, form) {
+            .findFormById({_id: formId}, function(err, form) {
                 var fields = form.fields;
                 for (var i = 0; i < fields.length; i++) {
                     if (fields[i]._id == fieldId) {
@@ -72,8 +71,10 @@ module.exports = function(mongoose, FormModel) {
                 delete fieldObj.options[i]._id;
             }
         }
+        console.log("Creating new field for form " + formId);
         FormModel
-            .find({_id: formId}, function(err, form) {
+            .findFormById({_id: formId}, function(err, form) {
+                console.log(form);
                 form.fields.push(fieldObj);
                 form.save(function(err, form) {
                     defer.resolve(form);
@@ -94,7 +95,7 @@ module.exports = function(mongoose, FormModel) {
             }
         }
         FormModel
-            .find({_id: formId}, function(err, form) {
+            .findFormById({_id: formId}, function(err, form) {
                 var fields = form.fields;
                 for (var i = 0; i < fields.length; i++) {
                     if (fields[i]._id == fieldId) {
@@ -113,7 +114,7 @@ module.exports = function(mongoose, FormModel) {
     function updateAllFields(formId, fields) {
         var defer = q.defer();
         FormModel
-            .find({_id: formId}, function(err, form) {
+            .findFormById({_id: formId}, function(err, form) {
                 form.fields = fields;
                 form.save(function(err, form) {
                     defer.resolve(form.fields);

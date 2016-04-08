@@ -33,7 +33,6 @@ module.exports = function(mongoose) {
                 }
             });
         var forms = findFormsByUserId(formObj.userId);
-        console.log(forms);
         defer.resolve(forms);
         return defer.promise;
     }
@@ -55,6 +54,8 @@ module.exports = function(mongoose) {
         var defer = q.defer();
         FormModel
             .find({_id: formId}, function(err, form) {
+                console.log(err);
+                console.log(form);
                 if (err) {
                     defer.reject(err);
                 } else {
@@ -74,7 +75,6 @@ module.exports = function(mongoose) {
                 }
             });
         var forms = findFormsByUserId(formObj.userId);
-        console.log(forms);
         defer.resolve(forms);
         return defer.promise;
     }
@@ -107,11 +107,8 @@ module.exports = function(mongoose) {
 
     function findFormsByUserId(userId) {
         var defer = q.defer();
-        console.log("Finding forms by user.");
         FormModel
             .find({userId: userId}, function(err, forms) {
-                console.log(err);
-                console.log(forms);
                 if (err) {
                     defer.reject(err);
                 } else {

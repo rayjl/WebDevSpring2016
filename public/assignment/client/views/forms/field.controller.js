@@ -52,7 +52,8 @@
 
         function addField(fieldType) {
             var newField = {
-                "type": fieldType
+                "type": fieldType,
+                "options": []
             };
 
             // Check the type of field to add
