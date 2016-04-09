@@ -54,8 +54,6 @@ module.exports = function(mongoose) {
         var defer = q.defer();
         FormModel
             .find({_id: formId}, function(err, form) {
-                console.log(err);
-                console.log(form);
                 if (err) {
                     defer.reject(err);
                 } else {
@@ -72,10 +70,11 @@ module.exports = function(mongoose) {
             .update({_id: formId}, {$set: formObj}, function(err, form) {
                 if (err) {
                     defer.reject(err);
+                } else {
+                    defer.resolve(form);
                 }
             });
-        var forms = findFormsByUserId(formObj.userId);
-        defer.resolve(forms);
+        console.log(formId + " updated.");
         return defer.promise;
     }
 

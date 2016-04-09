@@ -25,41 +25,34 @@ module.exports = function(mongoose, FormModel) {
 
     function findAllFields(formId) {
         var defer = q.defer();
-        FormModel
-            .findFormById({_id: formId}, function(err, form) {
-                defer.resolve(form.fields);
-            });
+        var form = FormModel.findFormById(formId);
+        defer.resolve(form.fields);
         return defer.promise;
     }
 
     function findFieldById(formId, fieldId) {
         var defer = q.defer();
-        FormModel
-            .findFormById({_id: formId}, function(err, form) {
-                var fields = form.fields;
-                for (var i = 0; i < fields.length; i++) {
-                    if (fields[i]._id == fieldId) {
-                        defer.resolve(fields[i]);
-                    }
-                }
-            });
+        var form = FormModel.findFormById(formId);
+        var fields = form.fields;
+        for (var i = 0; i < fields.length; i++) {
+            if (fields[i]._id == fieldId) {
+                defer.resolve(fields[i]);
+            }
+        }
         return defer.promise;
     }
 
     function deleteField(formId, fieldId) {
         var defer = q.defer();
-        FormModel
-            .findFormById({_id: formId}, function(err, form) {
-                var fields = form.fields;
-                for (var i = 0; i < fields.length; i++) {
-                    if (fields[i]._id == fieldId) {
-                        fields.splice(i, 1);
-                        form.save(function(err, form) {
-                            defer.resolve(form);
-                        });
-                    }
-                }
-            });
+        var form = FormModel.findFormById(formId);
+        var fields = form.fields;
+        for (var i = 0; i < fields.length; i++) {
+            if (fields[i]._id == fieldId) {
+                fields.splice(i, 1);
+                form = FormModel.updateForm(formId, form);
+                defer.resolve(form);
+            }
+        }
         return defer.promise;
     }
 
@@ -71,15 +64,19 @@ module.exports = function(mongoose, FormModel) {
                 delete fieldObj.options[i]._id;
             }
         }
-        console.log("Creating new field for form " + formId);
-        FormModel
-            .findFormById({_id: formId}, function(err, form) {
-                console.log(form);
-                form.fields.push(fieldObj);
-                form.save(function(err, form) {
-                    defer.resolve(form);
-                });
-            });
+        console.log(formId);
+        var form = FormModel.findFormById(formId);
+
+        console.log("Form fetched. Creating new field.");
+
+        if (!form.fields) {
+            form.fields = [];
+        }
+        form.fields.push(fieldObj);
+        console.log(fieldObj + " pushed.");
+
+        form = FormModel.updateForm(formId, form);
+        defer.resolve(form);
         return defer.promise;
     }
 
@@ -94,32 +91,26 @@ module.exports = function(mongoose, FormModel) {
                 newOptions.push({label: label, value: value});
             }
         }
-        FormModel
-            .findFormById({_id: formId}, function(err, form) {
-                var fields = form.fields;
-                for (var i = 0; i < fields.length; i++) {
-                    if (fields[i]._id == fieldId) {
-                        fields[i].label = fieldObj.label;
-                        fields[i].placeholder = fieldObj.placeholder;
-                        fields[i].options = newOptions;
-                        form.save(function(err, form) {
-                            defer.resolve(form);
-                        });
-                    }
-                }
-            });
+        var form = FormModel.findFormById(formId);
+        var fields = form.fields;
+        for (var i = 0; i < fields.length; i++) {
+            if (fields[i]._id == fieldId) {
+                fields[i].label = fieldObj.label;
+                fields[i].placeholder = fieldObj.placeholder;
+                fields[i].options = newOptions;
+                form = FormModel.updateForm(formId, form);
+                defer.resolve(form);
+            }
+        }
         return defer.promise;
     }
 
     function updateAllFields(formId, fields) {
         var defer = q.defer();
-        FormModel
-            .findFormById({_id: formId}, function(err, form) {
-                form.fields = fields;
-                form.save(function(err, form) {
-                    defer.resolve(form.fields);
-                });
-            });
+        var form = FormModel.findFormById(formId);
+        form.fields = fields;
+        form = FormModel.updateForm(formId, form);
+        defer.resolve(form.fields);
         return defer.promise;
     }
 

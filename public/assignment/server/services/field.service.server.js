@@ -28,6 +28,7 @@ module.exports = function(app, model) {
 
     function findAllFields(req, res) {
         var formId = req.params.formId;
+        console.log("Fetching all fields for " + formId);
         model
             .findAllFields(formId)
             .then(function(fields) {

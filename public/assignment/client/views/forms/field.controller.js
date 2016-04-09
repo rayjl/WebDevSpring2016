@@ -38,12 +38,14 @@
             FormService
                 .findFormById(formId)
                 .then(function(form) {
+                    console.log("Setting form for page.");
                     $scope.form = form;
                 });
             // Fetch the field for the current form
             FieldService
                 .getFieldsForForm(formId)
                 .then(function(fields) {
+                    console.log("Setting fields for page.");
                     $scope.fields = fields;
                 });
         }
@@ -98,6 +100,8 @@
                 newField.placeholder = "New unknown field";
             }
 
+            console.log("Adding new field: ");
+            console.log(newField);
             FieldService
                 .createFieldForForm(formId, newField)
                 .then(function(field) {
