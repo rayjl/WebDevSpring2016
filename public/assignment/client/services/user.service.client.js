@@ -11,6 +11,7 @@
 
         // Create a container to return
         var service = {
+            login: login,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
@@ -22,6 +23,20 @@
         return service;
 
         // --------------------------------------------------------------------
+
+        function login(username, password) {
+            var user = {
+                "username" : username,
+                "password" : password
+            };
+            var defer = $q.defer();
+            $http
+                .post("/api/assignment/login", user)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
 
         function findUserById(userId) {
             var defer = $q.defer();

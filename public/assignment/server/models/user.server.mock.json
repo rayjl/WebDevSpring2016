@@ -1,7 +1,8 @@
 [
   {
+    "roles": ["admin"],
     "username": "alice",
-    "password": "p@ssw0rd",
+    "password": "alice",
     "firstName": "Alice",
     "lastName": "Wonderland",
     "emails": ["alice@wonderland.com", "alice@gmail.com"],

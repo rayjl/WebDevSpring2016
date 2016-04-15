@@ -12,11 +12,14 @@
          * @param   {object} user   : new user to add
          */
         function register(user) {
-            // User has fields from form: username | password | verifyPassword | email
             var newUser = {
+                roles: [],
+                firstname: [],
+                lastname: [],
                 username: user.username,
                 password: user.password,
-                email: user.email
+                emails: [user.email],
+                phones: []
             };
 
             // Create a new user using the user service factory

@@ -3,6 +3,7 @@
 module.exports = function(mongoose) {
     var userSchema = mongoose.Schema(
         {
+            roles: [String],
             firstName: String,
             lastName: String,
             username: String,

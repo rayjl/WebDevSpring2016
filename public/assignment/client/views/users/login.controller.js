@@ -14,8 +14,7 @@
          */
         function login(username, password) {
             UserService
-                //.findUserById(123)
-                .findUserByCredentials(username, password)
+                .login(username, password)
                 .then(function(user) {
                     if (!user || user.length > 1) {
                         alert('Incorrect username or password.');
