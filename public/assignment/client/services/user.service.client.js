@@ -12,6 +12,7 @@
         // Create a container to return
         var service = {
             login: login,
+            register: register,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
@@ -32,6 +33,16 @@
             var defer = $q.defer();
             $http
                 .post("/api/assignment/login", user)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function register(userObj) {
+            var defer = $q.defer();
+            $http
+                .post("/api/assignment/register", userObj)
                 .success(function(response) {
                     defer.resolve(response);
                 });

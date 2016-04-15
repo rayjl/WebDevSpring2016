@@ -63,6 +63,7 @@ module.exports = function(app, model) {
     }
 
     function login(req, res) {
+        console.log("Attempting to login.");
         var user = req.user;
         res.json(user);
     }
@@ -94,6 +95,7 @@ module.exports = function(app, model) {
     }
 
     function register(req, res) {
+        console.log("Attempting to register.");
         var newUser = req.body;
         newUser.roles = ['student'];
 
