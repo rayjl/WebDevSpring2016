@@ -7,6 +7,8 @@
 
     <!--Table data-->
     <table class="table table-bordered table-striped table-hover">
+
+        <!--Head-->
         <thead>
             <tr>
                 <th>
@@ -19,70 +21,70 @@
                 </th>
                 <th>
                     <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    Role
+                    First Name
                 </th>
                 <th>
-                    Action
+                    <span class="glyphicon glyphicon-triangle-bottom"></span>
+                    Last Name
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-triangle-bottom"></span>
+                    Roles
+                </th>
+                <th>
+                    Actions
                 </th>
             </tr>
             <tr>
                 <th>
-                    <input type="text" class="form-control" placeholder="username">
+                    <input ng-model="user.username" type="text" class="form-control" placeholder="username">
                 </th>
                 <th>
-                    <input type="password" class="form-control" placeholder="password">
+                    <input ng-model="user.password" type="password" class="form-control" placeholder="password">
                 </th>
                 <th>
-                    <input type="text" class="form-control" placeholder="role1, role2">
+                    <input ng-model="user.firstname" type="text" class="form-control" placeholder="first name">
                 </th>
-                <th class="text-right">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span class="glyphicon glyphicon-ok"></span>
+                <th>
+                    <input ng-model="user.lastname" type="text" class="form-control" placeholder="last name">
+                </th>
+                <th>
+                    <input ng-model="user.roles" type="text" class="form-control" placeholder="role1, role2">
+                </th>
+                <th>
+                    <div class="btn-group-xs">
+                        <button ng-click="Add(user)" class="btn btn-default glyphicon glyphicon-plus"></button>
+                        <button ng-click="Update($index)" class="btn btn-default glyphicon glyphicon-cog"></button>
+                    </div>
                 </th>
             </tr>
         </thead>
+
+        <!--Body-->
         <tbody>
-            <tr>
+            <tr ng-repeat="user in users">
                 <td>
-                    alice
-                </td>
-                <td>
-                </td>
-                <td>
-                    student
-                </td>
-                <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    bob
+                    {{user.username}}
                 </td>
                 <td>
                 </td>
                 <td>
-                    faculty | admin
-                </td>
-                <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    charlie
+                    {{user.firstName}}
                 </td>
                 <td>
+                    {{user.lastName}}
                 </td>
                 <td>
+                    {{user.roles}}
                 </td>
-                <td class="text-right">
-                    <span class="glyphicon glyphicon-remove"></span>
-                    <span class="glyphicon glyphicon-pencil"></span>
+                <td>
+                    <div class="btn-group-xs">
+                        <button ng-click="Delete($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+                        <button ng-click="Edit($index)" class="btn btn-default glyphicon glyphicon-cog"></button>
+                    </div>
                 </td>
             </tr>
         </tbody>
+
     </table>
 </form>

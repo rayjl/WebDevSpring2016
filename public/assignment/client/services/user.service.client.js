@@ -19,7 +19,9 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+
+            adminFindAllUsers: adminFindAllUsers
         };
         return service;
 
@@ -73,6 +75,16 @@
             var defer = $q.defer();
             $http
                 .get("/api/assignment/user?username=" + username + "&password=" + password)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function adminFindAllUsers() {
+            var defer = $q.defer();
+            $http
+                .get("/api/assignment/admin/user")
                 .success(function(response) {
                     defer.resolve(response);
                 });

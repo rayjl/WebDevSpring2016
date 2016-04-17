@@ -9,6 +9,7 @@ module.exports = function(app, model) {
 
     // Security assignment update
     var auth = authenticated;
+    var adminAuth = isAdmin;
     app.post  ('/api/assignment/login', passport.authenticate('local'), login);
     app.post  ('/api/assignment/logout',         logout);
     app.post  ('/api/assignment/register',       register);
@@ -18,6 +19,8 @@ module.exports = function(app, model) {
     app.get   ("/api/assignment/user/:id",       findUserById);
     app.put   ('/api/assignment/user/:id', auth, updateUser);
     app.delete('/api/assignment/user/:id', auth, deleteUser);
+
+    app.get   ('/api/assignment/admin/user', adminAuth, adminFindAllUsers);
 
     // ------------------------------------------------------------------------
 
@@ -188,11 +191,23 @@ module.exports = function(app, model) {
             });
     }
 
-    function isAdmin(user) {
-        if (user.roles.indexOf("admin") > 0) {
-            return true;
+    function adminFindAllUsers(req, res) {
+        model
+            .findAllUsers()
+            .then(function (users) {
+                res.json(users);
+            });
+    }
+
+    function isAdmin(req, res, next) {
+        var adminUser = req.user;
+        console.log(req);
+        if (loggedin) {//} && adminUser.roles.indexOf("admin") > 0) {
+            next();
+        } else {
+            console.log('Not admin authorized.');
+            res.send(401);
         }
-        return false;
     }
 
     function authenticated(req, res, next) {
