@@ -201,7 +201,7 @@ module.exports = function(app, model) {
 
     function isAdmin(req, res, next) {
         var adminUser = req.user;
-        console.log(req);
+        //console.log(req);
         if (loggedin) {//} && adminUser.roles.indexOf("admin") > 0) {
             next();
         } else {

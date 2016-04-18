@@ -14,11 +14,11 @@
         function register(user) {
             var newUser = {
                 roles: [],
-                firstname: [],
-                lastname: [],
+                firstName: [],
+                lastName: [],
                 username: user.username,
                 password: user.password,
-                emails: [user.email],
+                emails: [user.emails],
                 phones: []
             };
 

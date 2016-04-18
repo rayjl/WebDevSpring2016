@@ -37,24 +37,24 @@
             </tr>
             <tr>
                 <th>
-                    <input ng-model="user.username" type="text" class="form-control" placeholder="username">
+                    <input ng-model="selectedUser.username" type="text" class="form-control" placeholder="username">
                 </th>
                 <th>
-                    <input ng-model="user.password" type="password" class="form-control" placeholder="password">
+                    <input ng-model="selectedUser.password" type="password" class="form-control" placeholder="password">
                 </th>
                 <th>
-                    <input ng-model="user.firstname" type="text" class="form-control" placeholder="first name">
+                    <input ng-model="selectedUser.firstName" type="text" class="form-control" placeholder="first name">
                 </th>
                 <th>
-                    <input ng-model="user.lastname" type="text" class="form-control" placeholder="last name">
+                    <input ng-model="selectedUser.lastName" type="text" class="form-control" placeholder="last name">
                 </th>
                 <th>
-                    <input ng-model="user.roles" type="text" class="form-control" placeholder="role1, role2">
+                    <input ng-model="selectedUser.roles" type="text" class="form-control" placeholder="role1, role2">
                 </th>
                 <th>
                     <div class="btn-group-xs">
-                        <button ng-click="Add(user)" class="btn btn-default glyphicon glyphicon-plus"></button>
-                        <button ng-click="Update($index)" class="btn btn-default glyphicon glyphicon-cog"></button>
+                        <button ng-click="adminAddUser(selectedUser)" class="btn btn-default glyphicon glyphicon-plus"></button>
+                        <button ng-click="adminUpdateUser(selectedUser)" class="btn btn-default glyphicon glyphicon-ok"></button>
                     </div>
                 </th>
             </tr>
@@ -62,25 +62,25 @@
 
         <!--Body-->
         <tbody>
-            <tr ng-repeat="user in users">
+            <tr ng-repeat="selectedUser in users">
                 <td>
-                    {{user.username}}
+                    {{selectedUser.username}}
                 </td>
                 <td>
                 </td>
                 <td>
-                    {{user.firstName}}
+                    {{selectedUser.firstName}}
                 </td>
                 <td>
-                    {{user.lastName}}
+                    {{selectedUser.lastName}}
                 </td>
                 <td>
-                    {{user.roles}}
+                    {{selectedUser.roles}}
                 </td>
                 <td>
                     <div class="btn-group-xs">
-                        <button ng-click="Delete($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
-                        <button ng-click="Edit($index)" class="btn btn-default glyphicon glyphicon-cog"></button>
+                        <button ng-click="adminDeleteUser($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+                        <button ng-click="adminEditUser($index)" class="btn btn-default glyphicon glyphicon-cog"></button>
                     </div>
                 </td>
             </tr>
