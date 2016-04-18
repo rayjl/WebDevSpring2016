@@ -5,7 +5,7 @@
         .module("FormBuilderApp")
         .controller("AdminController", AdminController);
 
-    function AdminController($scope, $rootScope, UserService) {
+    function AdminController($scope, $rootScope, $location, UserService) {
         var pageUser = $rootScope.user;
         $scope.adminAddUser = adminAddUser;
         $scope.adminEditUser = adminEditUser;
@@ -16,6 +16,9 @@
 
         if (pageUser) {
             init();
+        } else {
+            console.log("No one logged in.");
+            $location.url('/home');
         }
 
         function init() {

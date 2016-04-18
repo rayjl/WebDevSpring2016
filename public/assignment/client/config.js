@@ -18,11 +18,21 @@
                 })
                 .when("/profile", {
                     templateUrl: "views/users/profile.view.html",
-                    controller: "ProfileController"
+                    controller: "ProfileController",
+                    resolve: {
+                        "auth" : function(UserService) {
+                            return UserService.loggedin();
+                        }
+                    }
                 })
                 .when("/admin", {
                     templateUrl: "views/admin/admin.view.html",
-                    controller: "AdminController"
+                    controller: "AdminController",
+                    resolve: {
+                        "auth" : function(UserService) {
+                            return UserService.loggedin();
+                        }
+                    }
                 })
                 .when("/forms", {
                     templateUrl: "views/forms/forms.view.html",

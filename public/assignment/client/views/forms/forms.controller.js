@@ -5,7 +5,7 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController($scope, $rootScope, FormService) {
+    function FormController($scope, $rootScope, $location, FormService) {
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
@@ -16,7 +16,8 @@
         if (user) {
             init();
         } else {
-            console.log('Login to use.');
+            console.log("No one logged in.");
+            $location.url('/home');
         }
 
         /*

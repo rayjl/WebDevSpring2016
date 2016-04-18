@@ -5,9 +5,20 @@
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, UserService) {
+    function ProfileController($scope, $rootScope, $location, UserService) {
         $scope.update = update;
-        $scope.user = $rootScope.user;
+        var user = $rootScope.user;
+
+        if (user) {
+            init();
+        } else {
+            console.log("No one logged in.");
+            $location.url('/home');
+        }
+
+        function init() {
+            $scope.user = user;
+        }
 
         /*
          * @param   {object} user   : user to update
