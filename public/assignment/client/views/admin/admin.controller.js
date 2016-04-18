@@ -31,20 +31,21 @@
 
         function adminAddUser(selectedUser) {
             var newUser = {
-                roles: [],
-                firstName: [],
-                lastName: [],
+                roles: selectedUser.roles,
+                firstName: selectedUser.firstName,
+                lastName: selectedUser.lastName,
                 username: selectedUser.username,
                 password: selectedUser.password,
                 emails: [selectedUser.emails],
-                phones: []
+                phones: [selectedUser.phones]
             };
 
             // Create a new user using the user service factory
             UserService
-                .register(newUser)
+                .adminCreateUser(newUser)
                 .then(function(user) {
                     init();
+                    $scope.selectedUser = user;
                 });
         }
 
@@ -73,7 +74,7 @@
                 return;
             }
             UserService
-                .deleteUserById(selectedUser._id)
+                .adminDeleteUserById(selectedUser._id)
                 .then(function(users) {
                     init();
                 });
@@ -81,7 +82,7 @@
 
         function adminUpdateUser(selectedUser) {
             UserService
-                .updateUser(selectedUser._id, selectedUser)
+                .adminUpdateUser(selectedUser._id, selectedUser)
                 .then(function(users) {
                     init();
                 });

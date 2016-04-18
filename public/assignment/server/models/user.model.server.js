@@ -18,11 +18,27 @@ module.exports = function(db, mongoose) {
         updateUser: updateUser,
         deleteUser: deleteUser,
         findUserByUsername: findUserByUsername,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        adminCreateUser: adminCreateUser
     };
     return api;
 
     // ------------------------------------------------------------------------
+
+    function adminCreateUser(userObject) {
+        var defer = q.defer();
+
+        console.log(userObject);
+        UserModel
+            .create(userObject, function(err, user) {
+                if (err) {
+                    defer.reject(err);
+                } else {
+                    defer.resolve(user);
+                }
+            });
+        return defer.promise;
+    }
 
     function createUser(userObject) {
         var defer = q.defer();

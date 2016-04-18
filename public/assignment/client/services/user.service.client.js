@@ -21,7 +21,11 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
 
-            adminFindAllUsers: adminFindAllUsers
+            adminFindAllUsers: adminFindAllUsers,
+            adminFindUserById: adminFindUserById,
+            adminCreateUser: adminCreateUser,
+            adminDeleteUserById: adminDeleteUserById,
+            adminUpdateUser: adminUpdateUser
         };
         return service;
 
@@ -81,16 +85,6 @@
             return defer.promise;
         }
 
-        function adminFindAllUsers() {
-            var defer = $q.defer();
-            $http
-                .get("/api/assignment/admin/user")
-                .success(function(response) {
-                    defer.resolve(response);
-                });
-            return defer.promise;
-        }
-
         function findAllUsers() {
             var defer = $q.defer();
             $http
@@ -125,6 +119,56 @@
             var defer = $q.defer();
             $http
                 .put("/api/assignment/user/" + userId, userObj)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function adminFindAllUsers() {
+            var defer = $q.defer();
+            $http
+                .get("/api/assignment/admin/user")
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function adminFindUserById(userId) {
+            var defer = $q.defer();
+            $http
+                .get("/api/assignment/admin/user/" + userId)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function adminCreateUser(userObj) {
+            var defer = $q.defer();
+            $http
+                .post("/api/assignment/admin/user", userObj)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function adminDeleteUserById(userId) {
+            var defer = $q.defer();
+            $http
+                .delete("/api/assignment/admin/user/" + userId)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function adminUpdateUser(userId, userObj) {
+            var defer = $q.defer();
+            $http
+                .put("/api/assignment/admin/user/" + userId, userObj)
                 .success(function(response) {
                     defer.resolve(response);
                 });

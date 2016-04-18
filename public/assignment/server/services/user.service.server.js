@@ -21,6 +21,10 @@ module.exports = function(app, model) {
     app.delete('/api/assignment/user/:id', auth, deleteUser);
 
     app.get   ('/api/assignment/admin/user', adminAuth, adminFindAllUsers);
+    app.get   ('/api/assignment/admin/user/:id', adminAuth, adminFindUserById);
+    app.post  ('/api/assignment/admin/user', adminAuth, adminCreateUser);
+    app.delete('/api/assignment/admin/user/:id', adminAuth, adminDeleteUser);
+    app.put   ('/api/assignment/admin/user/:id', adminAuth, adminUpdateUser);
 
     // ------------------------------------------------------------------------
 
@@ -195,6 +199,69 @@ module.exports = function(app, model) {
         model
             .findAllUsers()
             .then(function (users) {
+                res.json(users);
+            });
+    }
+
+    function adminFindUserById(req, res) {
+        var id = req.params.id;
+        model
+            .findUserById(id)
+            .then(function(user) {
+                res.json(user);
+            });
+    }
+
+    function adminCreateUser(req, res) {
+        console.log("Attempting to create new user by admin.");
+        var newUser = req.body;
+        model
+            .findUserByUsername(newUser.username)
+            .then(
+                function(user){
+                    if(user) {
+                        res.json(null);
+                    } else {
+                        return model.adminCreateUser(newUser);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function adminDeleteUser(req, res) {
+        var id = req.params.id;
+        model
+            .deleteUser(id)
+            .then(function(users) {
+                res.json(users);
+            });
+    }
+
+    function adminUpdateUser(req, res) {
+        var id = req.params.id;
+        var user = req.body;
+        model
+            .updateUser(id , user)
+            .then(function(users) {
                 res.json(users);
             });
     }
