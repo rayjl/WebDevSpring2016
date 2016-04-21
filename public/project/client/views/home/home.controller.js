@@ -76,11 +76,41 @@
                             console.log(jsonResults);
 
                             // Add fetched data to new listing
-                            var newListing = [];
+                            var newListingsRaw = jsonResults.response.results.result;
+
+                            // Iterate through and create listing objects
+                            var knownListings = {};
+                            var newListings = [];
+                            var runnerIdx = 0;
+                            for (var i = 0; i < newListingsRaw.length; i++) {
+                                var rawListing = newListingsRaw[i];
+                                console.log(rawListing);
+
+                                var rawListingAddress = rawListing.address;
+                                var rawZestimate = rawListing.zestimate;
+                                var rawLinks = rawListing.links;
+
+                                if (knownListings[rawListingAddress.street]) {
+                                    continue;
+                                }
+
+                                var amount = rawZestimate.amount.text;
+                                if (amount) {
+                                    newListings[runnerIdx] = {
+                                        "street": rawListingAddress.street,
+                                        "city": rawListingAddress.city,
+                                        "state": rawListingAddress.state,
+                                        "zestimate": '$' + rawZestimate.amount.text,
+                                        "details": rawLinks.homedetails
+                                    };
+                                    runnerIdx++;
+                                }
+
+                            }
 
                             // Set the search state of the page and the new listings returned
-                            if (newListing.length > 0) {
-                                $scope.listings = newListing;
+                            if (newListings.length > 0) {
+                                $scope.listings = newListings;
                                 setSearchState(true);
                             } else {
                                 $scope.listings = [];

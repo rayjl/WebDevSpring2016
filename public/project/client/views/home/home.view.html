@@ -40,6 +40,9 @@
             <th>
                 Details
             </th>
+            <th>
+                Actions
+            </th>
         </tr>
         </thead>
         <!--Body-->
@@ -61,10 +64,10 @@
                 {{listing.zestimate}}
             </td>
             <td>
-                {{listing.details}}
+                <a ng-href={{listing.details}}>{{listing.details}}</a>
             </td>
             <td class="text-right">
-                <button ng-click="saveListing($index)" class="btn btn-default glyphicon glyphicon-remove"></button>
+                <button ng-click="saveListing($index)" class="btn btn-default glyphicon glyphicon-plus"></button>
             </td>
         </tr>
         </tbody>
