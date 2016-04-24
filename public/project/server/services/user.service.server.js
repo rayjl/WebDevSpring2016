@@ -45,10 +45,12 @@ module.exports = function(app, model) {
 
     function createUser(req, res) {
         var user = req.body;
+        console.log(user);
         model
             .findUserByUsername(user.username)
-            .then(function(user) {
-                if (user) {
+            .then(function(dbUser) {
+                if (dbUser) {
+                    console.log(dbUser);
                     res.json(null);
                 } else {
                     model

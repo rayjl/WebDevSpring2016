@@ -21,9 +21,12 @@
             };
 
             // Create a new user using the user service factory
+            console.log('Creating user.');
+            console.log(newUser);
             UserService
                 .createUser(newUser)
                 .then(function(user) {
+                    console.log('User registered. Routing to profile page.');
                     $rootScope.user = user;
                     $location.url('/profile');
                 });

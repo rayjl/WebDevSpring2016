@@ -1,9 +1,13 @@
 'use strict';
 var q = require('q');
 
-module.exports = function() {
+module.exports = function(db, mongoose) {
 
-    var users = require('./user.test.json');
+    // ------------------------------------------------------------------------
+
+    // Mongoose and MongoDB used
+    var UserSchemaP = require("./user.schema.js")(mongoose);
+    var UserModelP = mongoose.model("UserModelP", UserSchemaP);
 
     // ------------------------------------------------------------------------
 
@@ -24,22 +28,40 @@ module.exports = function() {
 
     function addFollowing(user, userToFollow) {
         var defer = q.defer();
-        user.following.push(userToFollow._id);
-        userToFollow.followers.push(user._id);
-        defer.resolve(user);
+
+        // Fetch users first
+        var user1 = findUserById(user._id);
+        var user2 = findUserById(userToFollow._id);
+
+        // Update both
+        user1.following.push(user2._id);
+        user2.followers.push(user1._id);
+        updateUser(user1._id, user1);
+        updateUser(user2._id, user2);
+
+        // Return user1
+        defer.resolve(user1);
         return defer.promise;
     }
 
     function deleteFollowingById(user, followingId) {
         var defer = q.defer();
-        var following = user.following;
+
+        // Fetch user first
+        var user1 = findUserById(user._id);
+
+        // Update it
+        var following = user1.following;
         for (var i = 0; i < following.length; i++) {
             var currFollowing = following[i];
             if (currFollowing._id == followingId) {
-                user.following.splice(i,1);
-                for (var j = 0; j < currFollowing.followers.length; j++) {
-                    if (currFollowing.followers[j]._id == user._id) {
-                        currFollowing.followers.splice(j,1);
+                user1.following.splice(i,1);
+                var user2 = findUserById(followingId);
+                for (var j = 0; j < user2.followers.length; j++) {
+                    if (user2.followers[j]._id == user1._id) {
+                        user2.followers.splice(j,1);
+                        updateUser(user1._id, user1);
+                        updateUser(user2._id, user2);
                         break;
                     }
                 }
@@ -52,79 +74,109 @@ module.exports = function() {
 
     function createUser(userObject) {
         var defer = q.defer();
-        users.push(userObject);
-        defer.resolve(users);
+
+        console.log('Adding fields to user object.');
+        console.log(userObject);
+        // Handle the user object
+        userObject.firstName = "";
+        userObject.lastName = "";
+        userObject.following = [];
+        userObject.followers = [];
+        userObject.savedListings = [];
+
+        console.log('Creating new user.');
+        console.log(userObject);
+        UserModelP
+            .create(userObject, function(err, user) {
+                if (err) {
+                    console.log(err);
+                    defer.reject(err);
+                } else {
+                    console.log('User created.');
+                    defer.resolve(user);
+                }
+            });
         return defer.promise;
     }
 
     function findAllUsers() {
         var defer = q.defer();
-        defer.resolve(users);
+        UserModelP
+            .find(function(err, users) {
+                if (err) {
+                    defer.reject(err);
+                } else {
+                    defer.resolve(users);
+                }
+            });
         return defer.promise;
     }
 
     function findUserById(id) {
         var defer = q.defer();
-        for (var i = 0; i < users.length; i++) {
-            if (users[i]._id == id) {
-                defer.resolve(users[i]);
-                return defer.promise;
-            }
-        }
-        defer.resolve(null);
+        UserModelP
+            .find({_id: id}, function(err, user) {
+                if (err) {
+                    defer.reject(err);
+                } else {
+                    defer.resolve(user);
+                }
+            });
         return defer.promise;
     }
 
     function updateUser(id, userObj) {
         var defer = q.defer();
-        for (var i = 0; i < users.length; i++) {
-            if (users[i]._id == id) {
-                users[i].firstName = userObj.firstName;
-                users[i].lastName = userObj.lastName;
-                users[i].username = userObj.username;
-                users[i].password = userObj.password;
-                defer.resolve(users);
-                return defer.promise;
-            }
-        }
-        defer.resolve(null);
+        delete userObj._id;
+        UserModelP
+            .update({_id: id}, {$set: userObj}, function(err, user) {
+                UserModel.find(function(err, user) {
+                    if (err) {
+                        defer.reject(err);
+                    } else {
+                        defer.resolve(user);
+                    }
+                })
+            });
         return defer.promise;
     }
 
     function deleteUser(id) {
         var defer = q.defer();
-        for (var i = 0; i < users.length; i++) {
-            if (users[i]._id == id) {
-                users.splice(i,1);
-                defer.resolve(users);
-                return defer.promise;
-            }
-        }
-        defer.resolve(null);
+        UserModelP
+            .remove({_id: id}, function(err, status) {
+                if (err) {
+                    defer.reject(err);
+                } else {
+                    defer.resolve(status);
+                }
+            });
         return defer.promise;
     }
 
     function findUserByUsername(username) {
         var defer = q.defer();
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].username == username) {
-                defer.resolve(users[i]);
-                return defer.promise;
-            }
-        }
-        defer.resolve(null);
+        UserModelP
+            .findOne({username: username}, function (err, user) {
+                if (err) {
+                    defer.reject(err);
+                } else {
+                    defer.resolve(user);
+                }
+            });
         return defer.promise;
     }
 
     function findUserByCredentials(credentials) {
         var defer = q.defer();
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].username == credentials.username && users[i].password == credentials.password) {
-                defer.resolve(users[i]);
-                return defer.promise;
-            }
-        }
-        defer.resolve(null);
+        UserModelP
+            .findOne({username: credentials.username, password: credentials.password}, function (err, user) {
+                if (err) {
+                    defer.reject(err);
+                } else {
+                    defer.resolve(user);
+                }
+            });
         return defer.promise;
     }
 

@@ -1,9 +1,13 @@
 'use strict';
 var q = require('q');
 
-module.exports = function() {
+module.exports = function(db, mongoose) {
 
-    var listings = require('./data.test.json');
+    // ------------------------------------------------------------------------
+
+    // Mongoose and MongoDB used
+    var DataSchemaP = require("./data.schema.js")(mongoose);
+    var DataModelP = mongoose.model("DataModelP", DataSchemaP);
 
     // ------------------------------------------------------------------------
 
