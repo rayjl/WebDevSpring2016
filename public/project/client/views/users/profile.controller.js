@@ -5,15 +5,17 @@
         .module("ZapApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $rootScope, UserService) {
+    function ProfileController($scope, $rootScope, $location, UserService) {
         $scope.update = update;
         var user = $rootScope.user;
 
         // Execute init to fill the profile page if valid user
         if (user) {
+            console.log('Valid user identified.');
             init();
         } else {
             alert('Invalid user set.');
+            $location.url('/home');
         }
 
         /*

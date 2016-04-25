@@ -55,8 +55,8 @@ module.exports = function(app, model) {
                 } else {
                     model
                         .createUser(user)
-                        .then(function(users) {
-                            res.json(users);
+                        .then(function(newUser) {
+                            res.json(newUser);
                         });
                 }
             });

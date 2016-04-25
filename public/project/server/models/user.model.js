@@ -20,11 +20,47 @@ module.exports = function(db, mongoose) {
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         addFollowing: addFollowing,
-        deleteFollowingById: deleteFollowingById
+        deleteFollowingById: deleteFollowingById,
+        addSavedListingById: addSavedListingById,
+        deleteSavedListingById: deleteSavedListingById
     };
     return api;
 
     // ------------------------------------------------------------------------
+
+    function addSavedListingById(userId, listingId) {
+        var defer = q.defer();
+        var user = findUserById(userId);
+        for (var i = 0; i < user.savedListings.length; i++) {
+            if (user.savedListings[i] == listingId) {
+                console.log('Listing already saved for this user.');
+                defer.resolve(user);
+                return defer.promise;
+            }
+        }
+        user.savedListings.push(listingId);
+        updateUser(user._id, user);
+
+        console.log('Listing added for this user.');
+        defer.resolve(user);
+        return defer.promise;
+    }
+
+    function deleteSavedListingById(userId, listingId) {
+        var defer = q.defer();
+        var user = findUserById(userId);
+        for (var i = 0; i < user.savedListings.length; i++) {
+            if (user.savedListings[i] == listingId) {
+                user.savedListings.splice(i,1);
+                updateUser(user._id, user);
+                defer.resolve(user);
+                return defer.promise;
+            }
+        }
+        console.log('User does not have this listing saved. No action performed.');
+        defer.resolve(user);
+        return defer.promise;
+    }
 
     function addFollowing(user, userToFollow) {
         var defer = q.defer();
@@ -90,6 +126,7 @@ module.exports = function(db, mongoose) {
             .create(userObject, function(err, user) {
                 if (err) {
                     console.log(err);
+                    console.log('User not created.');
                     defer.reject(err);
                 } else {
                     console.log('User created.');
@@ -130,7 +167,7 @@ module.exports = function(db, mongoose) {
         delete userObj._id;
         UserModelP
             .update({_id: id}, {$set: userObj}, function(err, user) {
-                UserModel.find(function(err, user) {
+                UserModelP.find(function(err, user) {
                     if (err) {
                         defer.reject(err);
                     } else {

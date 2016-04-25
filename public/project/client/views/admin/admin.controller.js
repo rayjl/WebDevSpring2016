@@ -17,6 +17,7 @@
             init();
         } else {
             alert('User is not a valid admin.');
+            $location.url('/home');
         }
 
         /*

@@ -5,7 +5,7 @@
         .module("ZapApp")
         .controller("HomeController", HomeController);
 
-    function HomeController($scope, $rootScope, DataService) {
+    function HomeController($scope, $rootScope, UserService, DataService) {
         $scope.saveListing = saveListing;
         $scope.executeSearch = executeSearch;
         var user = $rootScope.user;
@@ -26,10 +26,47 @@
          * @param   {int} index     : index depicting of listing to add
          */
         function saveListing(index) {
+            var listing = $scope.listings[index];
+
+            // Check if it already exists by using the details
+            var exists = false;
             DataService
-                .addSavedListing($scope.listings[index])
-                .then(function(listings) {
-                    console.log(listings);
+                .findAllSavedListings()
+                .then(function (listings) {
+                    for (var i = 0; i < listings.length; i++) {
+                        if (listings[i].details == listing.details) {
+                            console.log('Listing already exists in DB.');
+                            listing = listings[i];
+                            exists = true;
+                            break;
+                        }
+                    }
+                    if (!exists) {
+                        // Add the listing to the DB
+                        DataService
+                            .addSavedListing(listing)
+                            .then(function (newListing) {
+                                listing = newListing;
+                                console.log('Listing saved/added to DB.');
+                            });
+                    }
+
+                    // Check if the user already has it added
+                    if (user) {
+                        for (var j = 0; j < user.savedListings.length; j++) {
+                            if (user.savedListings[j] == listing._id) {
+                                console.log('User has the listing already saved. No action performed.');
+                                return;
+                            }
+                        }
+                        user.savedListings.push(listing);
+                        console.log('Listing added to user.');
+                        UserService
+                            .updateUser(user._id, user)
+                            .then(function(user) {
+                                $scope.user = user;
+                            });
+                    }
                 });
         }
 

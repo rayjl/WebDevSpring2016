@@ -17,18 +17,27 @@
                 username: user.username,
                 password: user.password,
                 email: user.email,
-                accountType: "user"
+                accountType: "admin"
             };
 
             // Create a new user using the user service factory
             console.log('Creating user.');
             console.log(newUser);
             UserService
-                .createUser(newUser)
+                .findUserByUsername(newUser.username)
                 .then(function(user) {
-                    console.log('User registered. Routing to profile page.');
-                    $rootScope.user = user;
-                    $location.url('/profile');
+                    if (user) {
+                        alert('User already registered. Please login.');
+                        $location.url('/login');
+                    } else {
+                        UserService
+                            .createUser(newUser)
+                            .then(function(user) {
+                                console.log('User registered. Routing to profile page.');
+                                $rootScope.user = user;
+                                $location.url('/profile');
+                            });
+                    }
                 });
         }
 

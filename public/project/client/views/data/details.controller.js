@@ -5,12 +5,16 @@
         .module("ZapApp")
         .controller("DetailsController", DetailsController);
 
-    function DetailsController($scope, $rootScope, DataService) {
+    function DetailsController($scope, $rootScope, $location, DataService) {
         $scope.removeListing = removeListing;
-        $scope.user = $rootScope.user;
+        var user = $rootScope.user;
 
         if (user) {
+            console.log('Details for user.');
+            console.log(user);
             init();
+        } else {
+            $location.url('/home');
         }
 
         /*
@@ -20,11 +24,14 @@
             var listings = [];
             for (var i = 0; i < user.savedListings.length; i++) {
                 DataService
-                    .findSavedListingById(user.savedListings[i]._id)
+                    .findSavedListingById(user.savedListings[i])
                     .then(function(listing) {
-                        listings.push(listing);
+                        console.log(listing[0]);
+                        listings.push(listing[0]);
                     });
             }
+            console.log('Init start.');
+            $scope.user = user;
             $scope.listings = listings;
         }
 
@@ -37,7 +44,7 @@
                 .then(function(listings) {
                    $scope.listings = listings;
                 });
-            user.savedListings.splice(index,1);
+            $scope.user.savedListings.splice(index,1);
         }
 
     }

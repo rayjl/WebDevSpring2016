@@ -12,6 +12,7 @@
         // Create a container to return
         var service = {
             findUserByCredentials: findUserByCredentials,
+            findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
@@ -47,6 +48,16 @@
             var defer = $q.defer();
             $http
                 .get("/api/project/user?username=" + username + "&password=" + password)
+                .success(function(response) {
+                    defer.resolve(response);
+                });
+            return defer.promise;
+        }
+
+        function findUserByUsername(username) {
+            var defer = $q.defer();
+            $http
+                .get("/api/project/user?username=" + username)
                 .success(function(response) {
                     defer.resolve(response);
                 });
