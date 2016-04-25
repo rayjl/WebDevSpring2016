@@ -59,12 +59,14 @@
                                 return;
                             }
                         }
-                        user.savedListings.push(listing);
+                        user.savedListings.push(listing._id);
                         console.log('Listing added to user.');
                         UserService
                             .updateUser(user._id, user)
                             .then(function(user) {
-                                $scope.user = user;
+                                console.log(user[0]);
+                                $rootScope.user = user[0];
+                                $scope.user = user[0];
                             });
                     }
                 });

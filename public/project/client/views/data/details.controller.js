@@ -5,12 +5,12 @@
         .module("ZapApp")
         .controller("DetailsController", DetailsController);
 
-    function DetailsController($scope, $rootScope, $location, DataService) {
+    function DetailsController($scope, $rootScope, $location, UserService, DataService) {
         $scope.removeListing = removeListing;
         var user = $rootScope.user;
 
         if (user) {
-            console.log('Details for user.');
+            console.log('Details page user.');
             console.log(user);
             init();
         } else {
@@ -22,16 +22,17 @@
          */
         function init() {
             var listings = [];
-            for (var i = 0; i < user.savedListings.length; i++) {
+            console.log($scope.user.savedListings);
+            for (var i = 0; i < $scope.user.savedListings.length; i++) {
                 DataService
-                    .findSavedListingById(user.savedListings[i])
+                    .findSavedListingById($scope.user.savedListings[i])
                     .then(function(listing) {
                         console.log(listing[0]);
                         listings.push(listing[0]);
                     });
             }
-            console.log('Init start.');
-            $scope.user = user;
+            console.log('Details page init start.');
+            $scope.user = $rootScope.user;
             $scope.listings = listings;
         }
 
@@ -39,12 +40,14 @@
          * @param   {int} index     : index of listing to remove
          */
         function removeListing(index) {
-            DataService
-                .deleteSavedListingById($scope.listings[index]._id)
-                .then(function(listings) {
-                   $scope.listings = listings;
-                });
             $scope.user.savedListings.splice(index,1);
+            UserService
+                .updateUser($scope.user._id, $scope.user)
+                .then(function(user) {
+                    console.log('Listing removed. User updated.');
+                    $rootScope.user = user;
+                    init();
+                });
         }
 
     }

@@ -10,8 +10,8 @@ module.exports = function(mongoose) {
             password: String,
             email: String,
             accountType: String,
-            following: [String],
-            followers: [String],
+            following: [Object],
+            followers: [Object],
             savedListings: [String]
         },
         {

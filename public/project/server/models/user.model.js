@@ -70,8 +70,8 @@ module.exports = function(db, mongoose) {
         var user2 = findUserById(userToFollow._id);
 
         // Update both
-        user1.following.push(user2._id);
-        user2.followers.push(user1._id);
+        user1.following.push(user2);
+        user2.followers.push(user1);
         updateUser(user1._id, user1);
         updateUser(user2._id, user2);
 
@@ -113,6 +113,7 @@ module.exports = function(db, mongoose) {
 
         console.log('Adding fields to user object.');
         console.log(userObject);
+
         // Handle the user object
         userObject.firstName = "";
         userObject.lastName = "";
